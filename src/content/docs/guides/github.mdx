@@ -109,7 +109,7 @@ As as student, you can upgrade your free acount to the [GitHub Education plan](h
 ## GitHub in VS Code
 VS Code has a built in Git client via the [Source Control](https://code.visualstudio.com/docs/sourcecontrol/overview) icon in the left sidebar. While the UI is a little less user-friendly than GitHub Desktop, it is more convenient to use since you can see your Git status along with your code all in one place. You will need to have Git installed on your machine for this to work, but you won't need to use the command line. We recommend that you familiarise yourself with this way of doing things for day-to-day use.
 
-## Practice
+## Things to practise
 
 ### Clone a repo:
 Let's clone the following repo from GitHub (use [VS Code's Source Control](https://code.visualstudio.com/docs/sourcecontrol/quickstart#_option-a-clone-a-repository-locally) for this): [https://github.com/ctlnorwich/Portfolio-Website-Example](https://github.com/ctlnorwich/Portfolio-Website-Example)
@@ -117,16 +117,15 @@ Let's clone the following repo from GitHub (use [VS Code's Source Control](https
 ### Fork a repo
 If we've cloned a repo we don't have permission to make changes to _directly_, we have the option to create a fork instead. A Fork is new, distinct version of the entire repository that shares code and visibility with the original. With a fork, we can use someone else's repo as a starting point for our own ideas. You have the option to preserve a connection 'upstream' back to the orignial repo, either to pull new features from the original or to create pull requests from your fork for the orignal owner to review and incorporate back into the original.
 
-### Create a repo
+### Create a new repo
 Let's create a repository from scratch. You can either do this locally and push to GitHub, or create the repo in GitHub first and clone it locally. We will create a README.md file for the repository. Typically, the README.md file is used to provide an overview of the project along with some examples and basic 'getting started' documentation (in-depth documentation is best created elsewhere). the `.md` file extension stands for [Markdown](https://www.markdownguide.org/) – an efficient language for formatting text documents, which has become the standard for authoring technical documentation and is also popular for blogging and longform writing.
 
 ### Create a branch
 It's good to get into the habit of creating branches to manage different aspects of your code. If you are unsure about your code, having a `develop` branch for work in progress or experimentation without changing anything on your `main` branch can be easier than commiting your half-finished or experimental code to your `main` branch and then having to revert that branch to an earlier commit if it doesn't work. This is essential when you are working on project where the `main` branch is the production version of your code, or in a bigger team where the `main` branch should only contain code which has been tested and approved by the lead developer.
 
 ### Push, Pull and Merge
-If you work on a codebase with multiple developers, you will eventually run into an issue where your local copy of a branch must be merged with the remote version on GitHub. This is not just because you have added your changes to the branch, but that someone else has added their changes while you were working and you need to pull these down and merge them with your own. Sometimes the merge can be automatic, but if you have both edited the same file in the same place, there will be a merge conflict and you will have to manually choose which parts to keep ('resolve the conflict'). Thankfully, VS Code and GitHub Deskop offer visual editors to help you do this. [How to deal with merge conflicts in VS Code](https://code.visualstudio.com/docs/sourcecontrol/merge-conflicts).
+If you work on a codebase with multiple developers, you will eventually run into an issue where your local copy of a branch must be merged with the remote version on GitHub. This is not just because you have added your changes to the branch, but that someone else has added their changes while you were working and you need to pull these down and merge them with your own. Sometimes the merge can be automatic, but if you have both edited the same file, there will be a merge conflict and you will have to manually choose which parts to keep ('resolve the conflict'). Thankfully, VS Code and GitHub Deskop offer visual editors to help you do this. [How to deal with merge conflicts in VS Code](https://code.visualstudio.com/docs/sourcecontrol/merge-conflicts).
 
 
 ## GitHub Pages
-
 The GitHub Pages feature allows you to host a single static website from a public repository of you choice. Static sites are composed of a collection of 'static' files (html, css, js and maybe some media files), unlike dynamic sites, which run code on a server and connect to a database of some kind. We can configure Pages in the settings for our repo once we've published it.
