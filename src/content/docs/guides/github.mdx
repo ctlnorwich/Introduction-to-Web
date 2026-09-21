@@ -24,6 +24,7 @@ Codebases can be complex collections of maybe hundreds or thousands of files tha
 - [GitHub](https://github.com/)
 - [GitHub Education](https://github.com/education)
 - [GitHub Desktop Docs](https://docs.github.com/en/desktop/overview/about-github-desktop)
+- [VS Code GitHub Docs](https://code.visualstudio.com/docs/sourcecontrol/github)
 :::
 
 ## How Git works
@@ -96,9 +97,6 @@ Congratulations! You've used Git in the Terminal! The directory which contains y
 ## GitHub Education
 As as student, you can upgrade your free acount to the [GitHub Education plan](https://github.com/education). This plan gives you access to some additional GitHub resources as well as various discounts and offers for online courses, software and hosting through the [GitHub Student Developer Pack](https://education.github.com/pack).
 
-## GitHub Codespaces
-[GitHub Codespaces](https://github.com/features/codespaces), accessible from you GitHub account, allows you to run a virtual machine along with VS Code in the cloud so you can do all your web development in your web browser. This is useful in cases where you are unable to set up the necessary tools on your machine, or you are using a tablet instead of a laptop or desktop computer. When you visit a GitHub repo, you can click on the green __Code__ dropdown to either clone the code to your local machine or 'spin up' a virtual machine Codespace to work on it in the cloud (each codespace will have a unique name). There are some restrictions to what you can do in a Codespace versus a local development environment, mainly around server-side applications. Since Codespaces use a cloud-hosted version of VS Code, you will need to mangage your Git repo via VS Code's Source Control feature (see below).
-
 ## GitHub Desktop
 [GitHub Desktop](https://desktop.github.com/download/) is an optional app that allows you to manage your local and remote Git repositories from an easy-to-use GUI. While you can also manage your Git repositories directly in VS Code using the sidebar GUI (also avoiding the need to memorise terminal commands), you may still prefer the simpler and separate experience of GitHub Desktop.
 
@@ -107,25 +105,27 @@ As as student, you can upgrade your free acount to the [GitHub Education plan](h
 - You can also **fetch** updates others have made, and review them before **pulling** them into your branch.
 
 ## GitHub in VS Code
-VS Code has a built in Git client via the [Source Control](https://code.visualstudio.com/docs/sourcecontrol/overview) icon in the left sidebar. While the UI is a little less user-friendly than GitHub Desktop, it is more convenient to use since you can see your Git status along with your code all in one place. You will need to have Git installed on your machine for this to work, but you won't need to use the command line. We recommend that you familiarise yourself with this way of doing things for day-to-day use.
+[VS Code has a built in Git client](https://code.visualstudio.com/docs/sourcecontrol/github) accessible via the Source Control icon in the left sidebar. While the UI is a little less user-friendly than GitHub Desktop, it is more convenient to use since you can see your Git status along with your code all in one place. You will need to have Git installed on your machine for this to work, but you won't need to use the command line. We recommend that you familiarise yourself with this way of doing things for day-to-day use.
 
-## Things to practise
+## Practise
 
-### Clone a repo:
+### 1. Clone a repo
 Let's clone the following repo from GitHub (use [VS Code's Source Control](https://code.visualstudio.com/docs/sourcecontrol/quickstart#_option-a-clone-a-repository-locally) for this): [https://github.com/ctlnorwich/Portfolio-Website-Example](https://github.com/ctlnorwich/Portfolio-Website-Example)
 
-### Fork a repo
+### 2. Fork a repo
 If we've cloned a repo we don't have permission to make changes to _directly_, we have the option to create a fork instead. A Fork is new, distinct version of the entire repository that shares code and visibility with the original. With a fork, we can use someone else's repo as a starting point for our own ideas. You have the option to preserve a connection 'upstream' back to the orignial repo, either to pull new features from the original or to create pull requests from your fork for the orignal owner to review and incorporate back into the original.
 
-### Create a new repo
+### 3. Create a new repo
 Let's create a repository from scratch. You can either do this locally and push to GitHub, or create the repo in GitHub first and clone it locally. We will create a README.md file for the repository. Typically, the README.md file is used to provide an overview of the project along with some examples and basic 'getting started' documentation (in-depth documentation is best created elsewhere). the `.md` file extension stands for [Markdown](https://www.markdownguide.org/) – an efficient language for formatting text documents, which has become the standard for authoring technical documentation and is also popular for blogging and longform writing.
 
-### Create a branch
+###  4.  Create a branch
 It's good to get into the habit of creating branches to manage different aspects of your code. If you are unsure about your code, having a `develop` branch for work in progress or experimentation without changing anything on your `main` branch can be easier than commiting your half-finished or experimental code to your `main` branch and then having to revert that branch to an earlier commit if it doesn't work. This is essential when you are working on project where the `main` branch is the production version of your code, or in a bigger team where the `main` branch should only contain code which has been tested and approved by the lead developer.
 
-### Push, Pull and Merge
+###  5.  Push, pull and merge
 If you work on a codebase with multiple developers, you will eventually run into an issue where your local copy of a branch must be merged with the remote version on GitHub. This is not just because you have added your changes to the branch, but that someone else has added their changes while you were working and you need to pull these down and merge them with your own. Sometimes the merge can be automatic, but if you have both edited the same file, there will be a merge conflict and you will have to manually choose which parts to keep ('resolve the conflict'). Thankfully, VS Code and GitHub Deskop offer visual editors to help you do this. [How to deal with merge conflicts in VS Code](https://code.visualstudio.com/docs/sourcecontrol/merge-conflicts).
 
+## GitHub Codespaces
+[GitHub Codespaces](https://github.com/features/codespaces), accessible from you GitHub account, allows you to run a virtual machine along with VS Code in the cloud so you can do all your web development in your web browser. This is useful in cases where you are unable to set up the necessary tools on your machine, or you are using a tablet instead of a laptop or desktop computer. When you visit a GitHub repo, you can click on the green __Code__ dropdown to either clone the code to your local machine or 'spin up' a virtual machine Codespace to work on it in the cloud (each codespace will have a unique name). There are some restrictions to what you can do in a Codespace versus a local development environment, mainly around server-side applications. Since Codespaces use a cloud-hosted version of VS Code, you will need to mangage your Git repo via VS Code's Source Control feature.
 
 ## GitHub Pages
 The GitHub Pages feature allows you to host a single static website from a public repository of you choice. Static sites are composed of a collection of 'static' files (html, css, js and maybe some media files), unlike dynamic sites, which run code on a server and connect to a database of some kind. We can configure Pages in the settings for our repo once we've published it.
