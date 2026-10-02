@@ -55,7 +55,7 @@ export const inline = {
     <h1 style="color:purple;">This is a purple heading</h1>
        
     <!-- Here's an inline script on a button element -->
-    <button onclick="alert('Alert JavaScript!);">Click me to alert!</button>
+    <button onclick="alert('Alert JavaScript!');">Click me to alert!</button>
 
     <button id="alertButton">Click me to log to the console!</button>
 

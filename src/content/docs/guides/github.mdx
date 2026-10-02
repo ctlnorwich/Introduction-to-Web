@@ -43,23 +43,24 @@ You can use Git directly from the command line or terminal if you want to, provi
 
 <Steps>
 
-1. Create a new folder called `my-git-project`.
+1. Create a new folder called `my-git-project` and open the project folder in VS Code.
 
-2. Open the project folder in VS Code.
+2. Open the terminal in **VS Code** (Terminal > New Terminal).
 
-3. Open the terminal in **VS Code** (Terminal > New Terminal).
-
-4. Use the terminal to create a new `readme.md` file:
-
-    ```bash
-    touch readme.md
-    ```
-
-5. Check git is installed on your machine:
+3. Check git is installed on your machine:
 
     ```bash
     git -v
     ```
+
+4. Configure your local git user name and email. You need these to identify yourself when you make changes to your git repository:
+
+    ```bash
+    git config --global user.name "<your-name>"
+    git config --global user.email "<your-email>"
+    ```
+
+5. Create a new `readme.md` file.
 
 6. Initialise a new git repository:
 
@@ -81,7 +82,7 @@ You can use Git directly from the command line or terminal if you want to, provi
     git commit -m "Initial commit"
     ```
 
-10. Check if there is anything further to commit (there shouldn't be):
+10. Check the status of your local git repository:
 
     ```bash
     git status
@@ -89,7 +90,7 @@ You can use Git directly from the command line or terminal if you want to, provi
 
 </Steps>
 
-Congratulations! You've used Git in the Terminal! The directory which contains your project will aslo contain a hidden `.git` directory. You'll only see this directory (or a ghostly version of it) if you enable 'show hidden files' in your operating system. If you delete this `.git` directory, you will delete the git repository, along with the project history, but you _won't_ delete the project itself – the most recent version of the project will remain intact.
+Congratulations! You've used Git in the Terminal! The directory which contains your project will aslo contain a hidden `.git` directory. You'll only see this directory (or a ghostly version of it) if you enable 'show hidden files' in your operating system. If you delete this `.git` directory, you will delete the git repository, along with the project history, but you _won't_ delete the project itself. The most recent version of the project will remain intact.
 
 ## GitHub
 [GitHub](https://github.com/) is currently the most popular platform for hosting and managing online Git repositories. Many software projects treat GitHub as a centralised online 'source of truth' for the codebase, with individual developers cloning the repo from GitHub to their local machine, pulling down the latest changes, then pushing the changes back to GitHub when they're ready. GitHub has always been a separate entity from the Git Open Source project and it is now owned by Microsoft. There are alteratives to GitHub such as [GitLab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/)
@@ -98,31 +99,31 @@ Congratulations! You've used Git in the Terminal! The directory which contains y
 As as student, you can upgrade your free acount to the [GitHub Education plan](https://github.com/education). This plan gives you access to some additional GitHub resources as well as various discounts and offers for online courses, software and hosting through the [GitHub Student Developer Pack](https://education.github.com/pack).
 
 ## GitHub Desktop
-[GitHub Desktop](https://desktop.github.com/download/) is an optional app that allows you to manage your local and remote Git repositories from an easy-to-use GUI. While you can also manage your Git repositories directly in VS Code using the sidebar GUI (also avoiding the need to memorise terminal commands), you may still prefer the simpler and separate experience of GitHub Desktop.
+[GitHub Desktop](https://desktop.github.com/download/) is an optional app that allows you to manage your local and remote Git repositories from an easy-to-use GUI. While you can also manage your Git repositories directly in VS Code using the sidebar GUI, you may still prefer the simpler and separate experience of GitHub Desktop.
 
 - After connecting your GitHub account, you can **push** your repository changes to the online GitHub 'origin', where others can view your code.
 - If your changes are on a sepearte branch, they can then be reviewed and **merged** into another branch by yourself or another collaborator. You can prompt a collaborator to do this by creating a **pull request**.
 - You can also **fetch** updates others have made, and review them before **pulling** them into your branch.
 
 ## GitHub in VS Code
-[VS Code has a built in Git client](https://code.visualstudio.com/docs/sourcecontrol/github) accessible via the Source Control icon in the left sidebar. While the UI is a little less user-friendly than GitHub Desktop, it is more convenient to use since you can see your Git status along with your code all in one place. You will need to have Git installed on your machine for this to work, but you won't need to use the command line. We recommend that you familiarise yourself with this way of doing things for day-to-day use.
+[VS Code has a built in Git client](https://code.visualstudio.com/docs/sourcecontrol/github) accessible via the Source Control icon in the left sidebar. While the UI is a little less user-friendly than GitHub Desktop, it is more convenient to use since you can see your Git status along with your code all in one place. You will need to have Git installed on your machine for this to work and you will need to use terminal commands at least once to set your name and email. We recommend that you familiarise yourself with this way of doing things for day-to-day use.
 
-## Practise
+## Practise using GitHub
 
 ### 1. Clone a repo
 Let's clone the following repo from GitHub (use [VS Code's Source Control](https://code.visualstudio.com/docs/sourcecontrol/quickstart#_option-a-clone-a-repository-locally) for this): [https://github.com/ctlnorwich/Portfolio-Website-Example](https://github.com/ctlnorwich/Portfolio-Website-Example)
 
 ### 2. Fork a repo
-If we've cloned a repo we don't have permission to make changes to _directly_, we have the option to create a fork instead. A Fork is new, distinct version of the entire repository that shares code and visibility with the original. With a fork, we can use someone else's repo as a starting point for our own ideas. You have the option to preserve a connection 'upstream' back to the orignial repo, either to pull new features from the original or to create pull requests from your fork for the orignal owner to review and incorporate back into the original.
+If we've cloned a repo we don't have permission to make changes to _directly_, we have the option to create a fork instead. A Fork is a new, distinct version of the entire repository that shares code and visibility with the original. With a fork, we can use someone else's repo as a starting point for our own ideas. You have the option to preserve a connection 'upstream' back to the orignial repo, either to pull new features from the original or to create 'pull requests' for the original owner to review and incorporate.
 
 ### 3. Create a new repo
-Let's create a repository from scratch. You can either do this locally and push to GitHub, or create the repo in GitHub first and clone it locally. We will create a README.md file for the repository. Typically, the README.md file is used to provide an overview of the project along with some examples and basic 'getting started' documentation (in-depth documentation is best created elsewhere). the `.md` file extension stands for [Markdown](https://www.markdownguide.org/) – an efficient language for formatting text documents, which has become the standard for authoring technical documentation and is also popular for blogging and longform writing.
+Let's create a repository from scratch. You can either do this locally and push to GitHub, or create the repo in GitHub first and clone it locally. We will create a README.md file for the repository. Typically, the README.md file is used to provide an overview of the project along with some examples and basic 'getting started' documentation (in-depth documentation is best created elsewhere). the `.md` file extension stands for [Markdown](https://www.markdownguide.org/), an efficient language for formatting text documents, which has become the standard for authoring technical documentation and is also popular for blogging and longform writing.
 
-###  4.  Create a branch
+###  4. Create a branch
 It's good to get into the habit of creating branches to manage different aspects of your code. If you are unsure about your code, having a `develop` branch for work in progress or experimentation without changing anything on your `main` branch can be easier than commiting your half-finished or experimental code to your `main` branch and then having to revert that branch to an earlier commit if it doesn't work. This is essential when you are working on project where the `main` branch is the production version of your code, or in a bigger team where the `main` branch should only contain code which has been tested and approved by the lead developer.
 
-###  5.  Push, pull and merge
-If you work on a codebase with multiple developers, you will eventually run into an issue where your local copy of a branch must be merged with the remote version on GitHub. This is not just because you have added your changes to the branch, but that someone else has added their changes while you were working and you need to pull these down and merge them with your own. Sometimes the merge can be automatic, but if you have both edited the same file, there will be a merge conflict and you will have to manually choose which parts to keep ('resolve the conflict'). Thankfully, VS Code and GitHub Deskop offer visual editors to help you do this. [How to deal with merge conflicts in VS Code](https://code.visualstudio.com/docs/sourcecontrol/merge-conflicts).
+###  5. Push, pull and merge
+If you work on a codebase with multiple developers, you will eventually run into an issue where your local copy of a branch must be merged with the remote version on GitHub. This is beacause someone else has changed the code while you were working and you now need to pull these changes down and merge them with your own. Sometimes the merge can be automatic, but if you have both edited the same file, there will be a **merge conflict** and you will have to manually choose which parts to keep ('resolve the conflict'). Thankfully, VS Code and GitHub Deskop offer visual editors to help you do this. [How to deal with merge conflicts in VS Code](https://code.visualstudio.com/docs/sourcecontrol/merge-conflicts).
 
 ## GitHub Codespaces
 [GitHub Codespaces](https://github.com/features/codespaces), accessible from you GitHub account, allows you to run a virtual machine along with VS Code in the cloud so you can do all your web development in your web browser. This is useful in cases where you are unable to set up the necessary tools on your machine, or you are using a tablet instead of a laptop or desktop computer. When you visit a GitHub repo, you can click on the green __Code__ dropdown to either clone the code to your local machine or 'spin up' a virtual machine Codespace to work on it in the cloud (each codespace will have a unique name). There are some restrictions to what you can do in a Codespace versus a local development environment, mainly around server-side applications. Since Codespaces use a cloud-hosted version of VS Code, you will need to mangage your Git repo via VS Code's Source Control feature.
