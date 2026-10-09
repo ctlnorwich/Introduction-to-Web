@@ -32,7 +32,7 @@
 
 @media (min-width: 38em) {
 	pre {
-		tab-size: 4;
+		tab-size: 2;
 	}
 }
 
@@ -123,7 +123,7 @@
 
 @media (min-width: 38em) {
 	.sandbox-text {
-		tab-size: 4;
+		tab-size: 2;
 	}
 }
 
@@ -199,7 +199,7 @@
 
 @media (min-width: 38em) {
 	.sandbox-console-log {
-		tab-size: 4;
+		tab-size: 2;
 	}
 }
 

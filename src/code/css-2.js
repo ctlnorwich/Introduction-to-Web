@@ -63,8 +63,8 @@ export const addingFlex = {
     </section>
   </body>
 </html>
-`, 
-css: `
+`,
+  css: `
 html {
     font-family: sans-serif;
     font-size: 12px;
@@ -164,8 +164,8 @@ export const flexFlow = {
     </section>
     </body>
 </html>
-`, 
-css : `
+`,
+  css: `
 html {
     font-family: sans-serif;
     font-size: 12px;
@@ -241,8 +241,8 @@ export const flexSizing = {
   </body>
 </html>
 `,
-css : 
-`
+  css:
+    `
 html {
     font-family: sans-serif;
     font-size: 12px;
@@ -335,7 +335,7 @@ export const flexAlignment = {
   </body>
 </html>
 `,
-css: `
+  css: `
 html {
     font-family: sans-serif;
     font-size: 12px;
@@ -403,7 +403,7 @@ export const addingGrid = {
 
 </html>
 `,
-css: `
+  css: `
 html {
     font-size: 12px;
 }
@@ -483,7 +483,7 @@ export const lineBasedPlacement = {
 
 </html>
 `,
-css: `
+  css: `
 html {
     font-size: 12px;
 }
@@ -578,7 +578,7 @@ export const gridColumn = {
 
 </html>
 `,
-css: `
+  css: `
 body {
     width: 90%;
     max-width: 900px;
@@ -622,7 +622,7 @@ header {
 
 
 export const gridTemplateAreas = {
-    html: `
+  html: `
 <!DOCTYPE html>
 <html lang="en-GB">
   <head>
@@ -686,7 +686,7 @@ export const gridTemplateAreas = {
   </body>
 
 </html>`,
-    css : `
+  css: `
 html {
   font-size: 12px
 } 
