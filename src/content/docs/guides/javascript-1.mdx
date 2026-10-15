@@ -1,5 +1,5 @@
 ---
-title: "JavaScript 1: Introduction to JavaScript"
+title: "Introduction to JavaScript - Part 1"
 description: "Part 1 of the CTL's JavaScript Introduction."
 template: splash
 ---
@@ -12,7 +12,7 @@ import { FileTree } from '@astrojs/starlight/components';
 import sandbox from "~/sandbox/sandbox.js?url";
 import prism from "~/sandbox/prism.js?url";
 
-import { sandboxConsole, sandboxConst, sandboxLet, sandboxPractical, sandboxIfElse, sandboxElseIf, sandboxOperators, sandboxSwitch, sandboxAttributes, sandboxInvoke, sandboxEmoji } 
+import { sandboxConsole, sandboxConst, sandboxLet, sandboxPractical } 
 from "~/code/javascript.js"
 
 <script src={prism}></script>
@@ -24,7 +24,7 @@ JavaScript was created in 1995 to add interactivity to the web. Since then, it h
 
 Whilst it's possible to use JavaScript for **declarative** programming, it's primarily used as an **imperative** language, where developers outline each step the computer must take in order to achieve the desired result.
 
-While JavaScript was intially developerd as a **client-side** language, it is used (via Node.js) increasingly on the **server-side**, or in modern **serverless** cloud architecture, so it's a valuable language to learn!
+While JavaScript was intially developed as a **client-side** language, it is also used (mainly via Node.js) on the **server-side**, or in modern **serverless** cloud architecture. This makes JavaScript a truly a versatile and valuable language to learn. However, JavaScript is not without its idiosyncrasies: what goes for JavaScript may not go for other more 'conventional' programming languages!
 
 JavaScript is an **object-oriented language.** We'll talk a bit more about that means later.
 
@@ -64,13 +64,14 @@ JavaScript is an **object-oriented language.** We'll talk a bit more about that 
 - Number: `42`
 - Boolean: `true`
 - Bigint: `999999999999999n`
-- Object: `{ key: "this value is a string" }`
+- Object / Array: `["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]`
+- Object / Object: `{ keyHere: "Value here. In this case, the value is a string" }`
 - Symbol: `Symbol("description")`
 - Undefined: `undefined`
 - Null: `null`
 
 When we're programming, we inevitably come across values or data we'll need to use again later. We can store these bits of data to call upon in other parts of our script. We call these stored values **variables**. There are 8 types of data available to us in JavaScript, and any of them can be made into a variable.
-      
+
 ### Declaring a variable
 
 ```js 
@@ -87,6 +88,7 @@ It's good practice in JS for variable names to be written in camelCase.
 - The original keyword for declaring a variable is `var`. Don't use this on new projects, but you may see it in older examples and documentation.
 - We now have `let` and `const`. Use `let` if you want to update the value. Use `const` if you want the value to be a 'constant' and protected from being updated.
 - Unlike a lot of other programming languages, you don't have to declare a variable's datatype in JavaScript.
+
 ### Initialising a variable
 
 ```js 
@@ -133,7 +135,7 @@ While you cannot directy alter the value of a variable declared with `const`, yo
   </code-sandbox>
 </div>
 
-### Adding Comments
+### Adding comments
 
 ```js
 let taskName = "Learn React Native"; // Declare taskName 
@@ -152,7 +154,7 @@ isComplete = true;
 
 ### console.log()
 
-```js 
+```js
 let taskName = "Learn JavaScript"; 
 taskName = "Learn TypeScript"; 
 console.log(taskName);
@@ -162,7 +164,7 @@ console.log(taskName);
 - We can also use `console.warn()` and `console.error()` to output warnings and errors.
 - Activating Developer Tools in a web browser will bring up the console so we can see what's happening on the webpage.
 
-## Quick Practical
+## Quick practical
 
 <div class="not-content">
   <code-sandbox hidden console="open">
@@ -178,7 +180,7 @@ console.log(taskName);
 - Now, change `myName` to a `const`.
 - Open up Developer Tools in the browser to enjoy the `SyntaxError` in the console!
 
-## Basic Maths in JavaScript
+## Basic maths in JavaScript
 
 ```js
 let myInt = 7;
@@ -207,15 +209,13 @@ typeof myFloat;
 - This is useful when converting values entered on **HTML forms** - which are strings - into numbers we can calculate with.
 - In the above example, if we did not convert `myNumber`, the result would be `"75"`. Once we do, the output becomes `12`.
 
-### Arithmetic Operators
+### Arithmetic operators
 
 Remember that the standard order of operation for mathematics still applies in JavaScript!
 
 - The way we make calculations in JavaScript is by using **arithmetic operators**; most of these will already likely be familiar to you.
 - The **eModulo** operator will divide the number on the left by the number on the right, returning the remainder value if the two numbers cannot be divided exactly.
 - **Exponent** performs a exponentiation or 'to the power of' calculation, which raises the number on the left to the power of the number on the right. In our example, we raise 5 to the power of 2; 5 squared is 25.
-
-### Arithmetic Operators
 
 <table>
   <thead>
@@ -259,7 +259,7 @@ Remember that the standard order of operation for mathematics still applies in J
   </tbody>
 </table>
 
-### Increment/Decrement Operators
+### Increment/Decrement operators
 
 ```js 
 let num = 6;
@@ -274,7 +274,7 @@ num--; // returns value of num, then subtracts 1
 - This can be useful when used as part of a loop, or to create a counter for conditional logic.
 - The value your console will return will depend on whether you place the operator before or after your variable.
 
-## Assignment Operators
+## Assignment operators
 
 ```js 
 let num = 6;
@@ -286,210 +286,3 @@ num /= 2; // divides by 2, then updates the value of num
 
 - Assignment operators, unsurprisingly, assign a value to a variable. The most basic is =, which we've seen a lot of already.
 - The more complex operators are useful shorthand to keep our code neat and save time. Instead of writing x = x + 5; , we can just write x += 5.
-
-## Comparison Operators
-
-<table>
-  <thead>
-    <tr>
-      <th>Operator</th>
-      <th>Name</th>
-      <th>Purpose</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>`===`</td>
-      <td>Strict equality</td>
-      <td>Tests whether left and right values are identical</td>
-      <td>`5 === 4+1`</td>
-    </tr>
-    <tr>
-      <td>`!==`</td>
-      <td>Strict non-equality</td>
-      <td>Tests whether left and right values are not identical</td>
-      <td>`5 == 4+2`</td>
-    </tr>
-    <tr>
-      <td>`<`</td>
-      <td>Less than</td>
-      <td>Tests whether the left value is smaller than the right one</td>
-      <td>`5 < 10`</td>
-    </tr>
-    <tr>
-      <td>`>`</td>
-      <td>Greater than</td>
-      <td>Tests whether the left value is greater than the right one</td>
-      <td>`5 > 3`</td>
-    </tr>
-    <tr>
-      <td>`<=`</td>
-      <td>Less or equal to</td>
-      <td>Tests whether the left value is smaller or equal to the right one</td>
-      <td>`5 <= 6`</td>
-    </tr>
-    <tr>
-      <td>`>=`</td>
-      <td>Greater or equal to</td>
-      <td>Tests whether the left value is greater or equal to the right one</td>
-      <td>`5 >= 4`</td>
-    </tr>
-  </tbody>
-</table>
-
-- Sometimes, we will need to run a true/false test between values, and carry out actions based on the result.
-- This is where Comparison operators come in. These will return a Boolean value of true or false which you can use elsewhere in your code.
-- With these operators, we can begin to start thinking about introducing logic into our scripts.
-
-## If... Else Statements
-
-<div class="not-content">
-  <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxIfElse.html}</textarea>
-    <textarea for="js" open>{sandboxIfElse.js}</textarea>
-  </code-sandbox>
-</div>
-
-- As we just discussed, sometimes we want to make decisions in our code based on a condition.
-- If... else statements look to see if an expression you specify returns as true. If it does, it executes one block of code; if not, it executes a different block.
-- We can also nest if...else statements if we wish to create several layers of choice - kind of like a dialogue tree in a video game.
-
-## else if
-
-<div class="not-content">
-  <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxElseIf.html}</textarea>
-    <textarea for="js" open>{sandboxElseIf.js}</textarea>
-  </code-sandbox>
-</div>
-
-- If... else statements on their own give us only two options to choose from. But what if we need more?
-- We can use else if to add additional conditions into our If...else statement.
-- Since JavaScript runs from top to bottom, order is important - else if sits after the if action but before the else keyword.
-- We can add as many else if conditions into our statement as we like.
-- Once the computer finds one of the statements true, it will not check any of the ones following it.
-
-
-## Logical Operators: AND, OR, NOT
-
-<div class="not-content">
-  <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxOperators.html}</textarea>
-    <textarea for="js" open>{sandboxOperators.js}</textarea>
-  </code-sandbox>
-</div>
-
-- Logical operators allow us to create more complex logic by testing more than one condition at a time.
-- The AND operator (&&) chains multiple conditions together. All the conditions must be true for the whole expression to return as true.
-- The OR operator (||) also chains together conditions, but only one of the conditions needs to be true for the whole expression to be true.
-- Finally, the NOT operator (!) negates all the conditions. The expression will only return as true if none of the individual conditions are true.
-
-## Ternary Operators
-
-```js
-let ticketsAvailable = true;
-ticketsAvailable ? console.log("Tickets Available!") : console.log("Sold Out!");
-```
-
-- There's one last operator to introduce: the Ternary Operator.
-- This operator allows us to test a condition, returning one of two expressions based on whether our condition is true or false.
-- It's a useful tool for simple conditional tests, as it takes up a lot less code than a full if/else statement.
-
-## Switch Statements
-
-<div class="not-content">
-  <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxSwitch.html}</textarea>
-    <textarea for="js" open>{sandboxSwitch.js}</textarea>
-  </code-sandbox>
-</div>
-
-- If...else statements are brilliant for a lot of purposes, but the syntax can be a bit bulky when you have a large number of options for a pretty simple condition.
-- That's where **switch statements** can help us out. Switch statements can take a single expression and compare it against multiple options until it finds one to match, executing the associated code.
-- The break keyword is used to ensure that the switch statement stops looking for matching conditions once it finds one.
-- The default option is used if none of the other cases match the expression.
-
-### Do You Need to Switch?
-
-- Sometimes you may want to think about how you can create 'conditional' logic without a `switch` or `if...else` statement.
-- One way to do this is to store conditional content in the html.
-- The below example fetches the corresponding `data-menu` value from selected option.
-
-<div class="not-content">
-  <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxAttributes.html}</textarea>
-    <textarea for="js" open>{sandboxAttributes.js}</textarea>
-  </code-sandbox>
-</div>
-
-## Functions vs. Methods
-
-```js
-// Define a string variable
-let str = "It's too early for teaching";
-
-// Use methods to affect that string object
-let str1 = str.toLowerCase(); 
-let str2 = str.toUpperCase();
-
-/* Defining our function using an expression statement, creating a const variable */
-const iAmTired = function() {
- console.log("It's too early for teaching!");
-}
-// Calling the function
-iAmTired();
-```
-
-- So far we've seen a few examples of JavaScript's inbuilt **methods** - sets of instructions that perform specific tasks for us.
-- What's important to note is that methods are associated with an Object - you can't have the console.log() method without the 'console' object, for example.
-- If we want to create a set of instructions we can re-use, without having to connect them to a specific object, we need a Function.
-
-## Defining a function
-
-```js
-/* A function declaration - we give our function a name and then describe it */
-function quickMaths (a, b) {
-  return a * b; 
-};
-
-/* A function expression - an anonymous function is stored in a variable */
-const quickMaths = function (a, b) {return a * b}; 
-```
-
-- Before we use a function, we have to define it - basically, explain what it does.
-- Let's look at two ways to define a function: Function Declarations and Function Expressions.
-- Both of these examples share 2 things: the function keyword, and arguments, enclosed in parentheses. With function expressions, we don't have to give our function a name.
-- Arguments are data values that are used inside the function. We can define those values when we invoke the function later!
-
-## Invoking a function
-
-<div class="not-content">
-    <code-sandbox hidden console="open">
-		  <textarea for="html">{sandboxInvoke.html}</textarea>
-      <textarea for="js" open>{sandboxInvoke.js}</textarea>
-  </code-sandbox>
-</div>
-
-- Once we've defined a function, we can choose to invoke it whenever we like. Once a function is invoked, the code inside will execute.
-- It's at this point that you can add your arguments into the parentheses: here we've replaced a and b with 5 and 8.
-- If you've used a function expression, you can then use the variable as a function in a wider context. Here, we're initialising a new variable, answer, using quickMaths.
-
-## Mood Emoji JS Challenge!
-
-Add JS so that the range slider determines which emoji is visible.
-
-<div class="not-content">
-   <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxEmoji.html}</textarea>
-    <textarea for="js" open>{sandboxEmoji.js}</textarea>
-  </code-sandbox>
-</div>
-
-<div class="not-content">
-  <code-sandbox collapse hidden>
-  	<div for="intro"><summary>Solution...</summary></div>
-		<textarea for="html">{sandboxEmoji.html}</textarea>
-    <textarea for="js" open>{sandboxEmoji.jsSolution}</textarea>
-  </code-sandbox>
-</div>

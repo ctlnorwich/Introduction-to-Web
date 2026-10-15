@@ -1,5 +1,5 @@
 ---
-title: "JavaScript 3: Functions, Loops, Iterables"
+title: "JavaScript 3: Arrays and Objects"
 description: "Part 3 of the CTL's JavaScript Introduction."
 template: splash
 ---
@@ -9,351 +9,395 @@ import { Aside } from "@astrojs/starlight/components";
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import { FileTree } from '@astrojs/starlight/components';
 
-## Functions Revisited
+import sandbox from "~/sandbox/sandbox.js?url";
+import prism from "~/sandbox/prism.js?url";
 
-A few quick questions to check we all remember last week’s section on Functions:
+import { sandboxModify, sandboxAdd, sandboxRemove, sandboxMap, sandboxConvert }
+  from "~/code/javascript-2.js"
 
-<details>
-<summary>What is the difference between a Function and a Method?</summary>
-A Method is a type of function directly attached to an Object.
-</details>
-<details>
-<summary>What makes a function expression different from a function declaration?</summary>
-We don’t have to give our function a name if we use a function expression.
-</details>
-<details>
-<summary>Name 2 key elements we need in a function expression/declaration.</summary>
-The function keyword; parameter parentheses.
-</details>
+<script src={prism}></script>
+<script src={sandbox} type="module"></script>
 
-There are three things wrong with this code. What are they?
+## What is an Array?
+Arrays are an iterable object type in JavaScript that allows us to group items. We've seen a few Arrays by now, but let's remind ourselves of the syntax: We declare Arrays as a `const`, as we can amend the items inside without having to redefine the array itself. Array items are placed between square brackets, and separated by commas. Not every item in an Array has to be of the same datatype.
 
 ```js
-let isSnowing = true;
+const dairyProducts = ["Milk", "Cream", "Cheese", "Ice Cream", "Yoghurt", "Butter", "Chocolate"];
 
-const snowcheck = function {
-	isSnowing ? "It is snowing!":"It is not snowing.";
-}
+const primeNums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
 
-console.log(snowcheck());
+const mixNMatch = [ 2, "chicken", 6, "Goat", "Cow", 4, 7, 10];
 ```
 
+### Accessing/Modifying Arrays
+Arrays are **zero indexed** – this means each item has an assigned number, starting at 0. We can access an individual item in an array using the item's index and bracket notation. 
+
+We can also **modify** a singular item by identifying its index and giving it a new value.
+
+We can create **multidimensional arrays** by creating an array inside another array. To access these items, we use two sets of bracket notation.
+
+If we don't know the index of an array item, we can find it using the `indexOf()` method. This method takes an array item as an argument, and returns the item's index. If the item isn't in the array, it will return -1.
+
+<div class="not-content">
+   <code-sandbox hidden console="open">
+		<textarea for="html">{sandboxModify.html}</textarea>
+    <textarea for="js" open>{sandboxModify.js}</textarea>
+  </code-sandbox>
+</div>
+
+### Adding Items
+
+To add an item onto the end of an array, we use the `.push()` method.
+If we want to add it to the beginning instead, we can use `.unshift()`.
+Methods like these are why we can assign arrays as constants and still change their values.
+
+JavaScript has no specific method for adding items to the middle of an array.
+However, we can leverage the `.splice()` method to help us with this.
+`.splice()` takes 3 arguments:
+
+1. the starting index from where we want to add items.
+2. the number of items to be deleted, starting from the index number previously given. If this value is 0, nothing is deleted.
+3. The new item(s) to be added, separated by a comma.
+
+<div class="not-content">
+  <code-sandbox hidden console="open">
+	  <textarea for="html">{sandboxAdd.html}</textarea>
+    <textarea for="js" open>{sandboxAdd.js}</textarea>
+  </code-sandbox>
+</div>
+
+### Removing items
+If we want to remove the last item from an array, we use `.pop()`
+To remove the first item, use `.shift()`
+Again, we can remove items from anywhere in the array (provided we know the index) using `.splice()`.
+In this splice, we specify to start at index 3, and to remove 2 items. Because we aren't adding any new items, we add no third argument.
+
+<div class="not-content">
+   <code-sandbox hidden console="open">
+		<textarea for="html">{sandboxRemove.html}</textarea>
+    <textarea for="js" open>{sandboxRemove.js}</textarea>
+  </code-sandbox>
+</div>
+
+
+### Accessing all items
+We've already practiced how to access every item in an array using a for… of loop.
+If we wish to apply a change to every single item in an array, we can do so using the `map()` method.
+the `map()` method takes a function as a parameter, so let's declare a function to add an exclamation mark to the end of each name string.
+`map()` then cycles through each item, performing the function.
+
+<div class="not-content">
+  <code-sandbox hidden console="open">
+		<textarea for="html">{sandboxMap.html}</textarea>
+    <textarea for="js" open>{sandboxMap.js}</textarea>
+  </code-sandbox>
+</div>
+
+### Converting Array Items
+
+You may have noticed in the previous example that we sometimes needed to convert our array items to strings for us to use them.
+We can convert Array items to strings using `.toString()`.
+There's several ways to convert to an array. Here, we've used `Array.from()`.
+
+<div class="not-content">
+  <code-sandbox hidden console="open">
+		<textarea for="html">{sandboxConvert.html}</textarea>
+    <textarea for="js" open>{sandboxConvert.js}</textarea>
+  </code-sandbox>
+</div>
+
+### Sets vs Arrays
+We've talked about Sets a few times – and they look very similar to Arrays. Here's the key similarities & differences you need to know:
+
+<Card title="Arrays">
+- Values do not have to be unique
+- Items can be duplicated
+- Items are ordered by index
+- Iterable by index
+</Card>
+
+<Card title="Sets">
+- Values must be unique
+- Items cannot be duplicated
+- Items have no specific order
+- Iterable by insertion order
+</Card>
+
+### Creating a Set
+We can create a set very easily using the Set() constructor. 
+There are fewer methods we can use to alter sets than we had for arrays:
+- `.add()` adds items to the set.
+- `.delete()` removes items in the set.
+- `.has()` searches the set for a specific item.
+- `.clear()` empties the set.
+
 ```js
-let isSnowing = true;
-
-const snowCheck = function() {
-return isSnowing ? "It is snowing!":"It is not snowing.";
-}
-
-console.log(snowCheck());
+const dairyProducts = new Set(["Milk", "Cream", "Cheese", "Ice Cream", "Yoghurt", "Chocolate"]);
+dairyProducts.add("Custard");
+/* returns ["Milk", "Cream", "Cheese", "Ice Cream", "Yoghurt", "Chocolate", "Custard"] */
+dairyProducts.delete("Chocolate");
+/* returns ["Milk", "Cream", "Cheese", "Ice Cream", "Yoghurt", "Custard"] */
+dairyProducts.has("Yoghurt");
+/* returns true */
+dairyProducts.clear();
+/* returns [] */
 ```
 
-### Function Parameters
+## What do we mean by Objects?
+In JavaScript, an Object is another way to group together related values and functionality.
+Take a look at this example. Inside this object we've stored an array and a number, as well as two functions: bio() and introduceSelf().
+There's quite a lot of different syntax inside our curly braces – most noticeably, no let, const, or function keywords.
 
 ```js
-// The Math.random() method does not require parameters:
+const person = {
+  name: ["Hannah-Louise", "Batt"],
+  age: 29;  bio() {
+    console.log(`${this.name[0]} ${this.name[1]} is ${this.age} years old.`);
+    },
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name[0]}.`);
+  },
+};
+```
+
+### Creating Objects: Example
+There's a copy of this object in the objects1.js file in VSCode. Open it up and add in your name and age, then save and run the HTML in LiveServer.
+Let's now open up developer tools on our browsers (F12). We can now access information from our object in the console by using the expressions on the left.
+
+```js
+person.name;
+person.name[0];
+person.age;
+person.bio();
+// "Hannah-Louise Batt is 29 years old."
+person.introduceSelf();
+// "Hi! I'm Hannah."
+```
+
+### Objects: syntax
+Let's head back to our object for a second to break down the syntax of objects:
+The first two members of our object (the name array and age) are called properties.
+The functions we created inside the object are known as methods
+We separate object members with commas, with properties being defined using colons (:) instead of equals (=).
+
+```js
+const person = {
+  name: ["Hannah-Louise", "Batt"],
+  age: 29, bio() {
+    console.log(`${this.name[0]} ${this.name[1]} is ${this.age} years old.`);
+    },
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name[0]}.`);
+  },
+};
+```
+
+### Dot notation
+When we access part of an object, or want to perform a method on an object, we use what's called dot notation.
+You've seen this plenty of times before at this point – we give the name of the related object, followed by a full stop, then the property we want to access, or the method we want to carry out.
+
+```js
+person.age;
+person.bio();
+console.log();
 Math.random();
-
-// our quickMaths() function from last session needed two:
-const quickMaths = function(a, b) {
-    return a * b;
-}
-quickMaths(3,5);
 ```
 
-- Parameters are the values we need to pass into the function so it can work properly.
-- Parameters aren’t necessary for every function – but even if we have no parameters, we still need to put the empty parentheses.
-- Some in-built functions in JS will have default parameters that will be used if none are given.
-
-#### Other names for Parameters you might see:
-- Arguments
-- Properties
-- Attributes
-
-### Default Parameters
-- In this example, the .toSorted() method expects us to provide a function as a parameter. If we don’t, it just sorts the array into alphabetical order.
-- If you’re building your own functions and would like to include a default value, you can do this by adding it into the parameter parentheses when you declare your function.
-
-### Anonymous Functions
-A lot of the functions you’ll see will have names – but not all of them.
-
-- We can create anonymous functions without giving a name.
-- We’ve seen this before – this is function expression. 
-- Until now, we’ve only used function expression to create a function inside a variable, but we don’t have to do it that way.
-- Anonymous functions are often used when a function is being used as a parameter for another function, like in the previous example.
+We can also make objects the properties of other objects – essentially nesting objects within one another.
+Here's how we would use dot notation to access those nested object properties.
 
 ```js
-// named function declaration
-function iAmTired() {
-	console.log(“It’s too early for teaching.”);
-}
-
-//anonymous function expression
-(function () {
-	console.log(“It’s too early for teaching.);
-});
+const person = {
+  name: {
+    first: "Hannah-Louise",
+    last: "Batt",
+    },
+};
+person.name.first;
 ```
 
-Let’s put this into context with an example.
-
-- The addEventListener() method requires two parameters from us:
-  - an event to listen out for
-  - a function to run when it happens
-- Open up anonymousFunctions.js and its accompanying HTML file in VSCode.
-- You’ll see a declared function, logKey(), and addEventListener().
+### Bracket Notation
+There are a few circumstances where dot notation doesn't work – for example, if the property name is held in a variable, or is the return value of a function.
+In these circumstances, we need to use bracket notation instead.
+This looks similar to the way we access items in a set or array.
 
 ```js
-function logKey(event) {
-alert(`You pressed "${event.key}".`);
+const person = {
+    name: ["Hannah-Louise", "Batt"],
+    age: 29,
+    isMarried: false,
+};
+const logInfo = function(propertyName) {
+    console.log (person[propertyName]);
 }
-addEventListener(“keydown”, logKey);
+logInfo("name");
+logInfo("age");
+logInfo("isMarried");
 ```
 
-- Instead of using a declaration, we can create an anonymous function directly inside the parentheses of addEventListener().
-- We might choose to do this for a few reasons: tidiness; performance optimisation; or simply because we only need to use this function once.
-- It’s worth remembering that function expressions can only be used once defined, and are often invoked immediately unless stored in a variable.
+### Modifying object members
+If we need to update the values of our object members, we can just use dot/bracket notation to access them, then assign them a new value.
 
 ```js
-addEventListener(“keydown”, function (event) {
-	alert(`You pressed "${event.key}".`;
-});
+const person = {
+    name: ["Hannah-Louise", "Batt"],
+    age: 29,
+    isMarried: false,
+};
+person.age = 30;
+person["isMarried"] = true;
 ```
 
-### Arrow Functions
-- Arrow functions are an alternate way to write function expressions.
-- They’re seen more often in more advanced JS frameworks, but it’s good to know what they look like for reference.
-- With arrow functions, we remove the function keyword.
+### Adding Object members
+We can also add brand new members to our objects as we go along.
+In this example, we've added a new property, person.hair, and a new method: person.isRetired().
 
 ```js
-hello = function() {
-	console.log(“Hello World!”);
-	return “Hello World!”;
-}
-
-hello = () => {
-    console.log(“Hello World!”);	
-    return “Hello World!”;
-}
+const person = {
+    name: ["Hannah-Louise", "Batt"],
+    age: 29,
+    isMarried: false,
+};
+person.hair = "blonde";
+person.isRetired = function(){
+return (person.age >= 65) ? true : false;
+};
+console.log(person.isRetired());
 ```
 
-If our function takes parameters, we would add them like this:
+### Removing Object members
+To remove an object member, use the delete keyword, then the members you want to remove.
 
 ```js
-quickMaths = function(a, b){
-	return a*b;
-}
+const person = {
+    name: ["Hannah-Louise", "Batt"],
+    age: 29,
+    isMarried: false,
+};
 
-quickMaths = (a, b) => a*b;
+delete person.isMarried;
 ```
 
-If our function only has one parameter, we can also remove the parentheses.
+### this
+Take a look at the object in the example – specifically at the method. Notice anything weird?
+We are using a new keyword – this. 
+We can use the this in our object methods when we want to refer to the object our method is part of.
 
 ```js
-quickMaths = function(a) {
-	return 2 * a;
-}
-
-quickMaths = a => 2 * a;
+const person = {
+  name: ["Hannah-Louise", "Batt"],
+  age: 29;  b
+  bio() {
+    console.log(`${this.name[0]} ${this.name[1]} is ${this.age} years old.`);
+    },
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name[0]}.`);
+  },
+};
 ```
 
-### Return Values
-
-- Return values are the values a function passes out when it’s finished running. 
-- Returns are mostly used when a function is part of a wider task, like multi-step calculations.
-- You don’t have to have a return value in a function if you don’t need it.
-- To return a value, just use the return keyword.
+### Constructors
+So far, we've been creating object literals – creating all our objects individually.
+To work at scale, we'll want a template we can replicate, only needing to update the values inside.
+We can do this by using a type of function called a constructor.
 
 ```js
-function random() {
-    return Math.floor(Math.random() * 100);
+// We start constructors with a capital letter, naming them after the object we want to create.
+function Person(name) {
+	this.name = name;
+	this.introduceSelf = function () {
+		console.log(`Hi! I'm ${this.name}.`);
+	};
 }
-
-let randomNumAnnouncer = function() {
-    alert(`Today/’s random number is ${random()}! `);
-}
-
-randomNumAnnouncer();
+// This constructor will create an object with one property: name; and a method: introduceSelf.
 ```
 
-### Scope
-
-- All the variables and other things we create inside a function are inaccessible by code outside the function. This is called function scope.
-- Variables and values defined outside a function are called Global variables, and can be accessed from anywhere in your script.
-
-Take a look at the functionScope.js file in your VSCode project. 
-See how we are able to use the inStock boolean inside our function? Because it’s defined outside of a function, it has global scope, so we can use it anywhere in our file.
-
-However, because the teaOptions array only has function scope, we cannot add new items to it outside the function. We can refer to these variables as local variables.
-If you check your browser console, you should see a ReferenceError appear once you close the alert.
-
-ES6 Introduced a new type of scope, block scope, which prevents let and const variables from being accessed from outside a { } block.
-Since local variables are destroyed when a function ends, we can use the same name for variables across different functions.
-It’s good practice to use as few global variables as possible – both for security reasons and to avoid potential code conflicts.
+We can then use the new keyword to call our constructor and easily create multiple objects.
 
 ```js
-// Cannot be accessed here
-{
-    let x = 4;
-    const Y = 5;
-// Can be accessed here
-}
-//Cannot be accessed here
+const hannah = new Person ("Hannah");
+hannah.introduceSelf();
+// returns "Hi! I'm Hannah."
+
+const will = new Person ("Will");
+will.introduceSelf();
+// returns "Hi! I'm Will."
 ```
 
-## Loops
+### Objects: Practical
+Find the Objects > Object Members > object-members.js files in the project folder.
+Our script contains an array of recipe names, which get mapped onto our webpage using a function.
+We want to be able to filter our recipes based on whether they're vegetarian, vegan, or gluten free.
 
-Sometimes, we need to repeat an action in code multiple times in order to get our desired result.
-Not only would writing out the same block of code multiple times take ages, it would be terrible for readability and troubleshooting, and leave us prone to more human error.
-This is why we use loops to run code multiple times.
+To do this, let's convert our array of strings into an array of Objects, each with 4 properties:
+name, vege, vegan, and glutenFree.
 
-```js
-let i = 1;
+- Convert the string array latestRecipes into an array of Objects – either through object literals or by using a constructor.
+- Take a look at the recipeCarousel function. What do we now need to change so that our function works properly with our new Object array?
+- Uncomment out the cleanup() and filter array method. Can we work out what these are doing in our code?
+- How might we add to our code so that we can change the filter by clicking the buttons on the page?
 
-console.log(i);
-i = i++;
-console.log(i);
-i = i++;
-console.log(i);
-i = i++;
-console.log(i);
-i = i++;
+## What is Object-Oriented Programming?
+Object-oriented programming is a paradigm that's central to many of our modern programming languages, including Java, C++, and C#.
 
-for (let i = 1; i<=10; i++) {
-    console.log(i);
-}
-```
+It's useful us to know a bit about OOP to get the most out of JavaScript.
+When we think about the types of objects we want to include in our code, we may find we can group objects under a single type definition. We call these definitions classes. 
+Classes then act as templates for creating new objects of that class – instances – with the same features.
 
-### For loops
-Let’s break down what’s going on here:
-We start off with the for keyword.
 
 ```js
-for (let i = 1; i<=10; i++) {
-    console.log(i);
-}
-```
+//We can create a class by using the class keyword, like so.
+// We then add the properties and methods we want to include in curly braces.
+class Technician {
+    name;
+    subject;
 
-We then have 3 values in the parentheses, separated with semicolons:
+    // Just like with objects, we'll need a constructor if we want to create new instances of our class.
+    // We define our constructor inside our class definition. 
+    // It's similar to how we defined a constructor earlier, except we use the constructor keyword instead.
 
-This first value is the initialiser, or counter variable. We increment this variable to set how many times our loop will run. 
+    constructor(name, subject) {
+        this.name = name;
+        this.subject = subject;
+    }
 
-We then have a condition – this is the condition that defines when the loop stops. Here, our counter loops as long as i is less than or equal to 10.
-
-Lastly, we have the final expression. This will run every time the loop finishes; in our case, it increases i by 1 each time.
-
-We then have whatever code block we want to loop within curly brackets.
-
-### For… of loops
-Often when we’re using loops, we’re looking to loop through a list of items in a collection rather than just looping a set number of times.
-This is where we can use a for… of loop. This kind of loop will use the number of items in a collection as its guide for how many loops to complete.
-
-```js
-const cATechs = [“Hannah”, “Hannah-Louise”, “Tanje”, “Linards”, “Tracey”, “Matthew”];
-
-for (const tech of cATechs) {
-	console.log(tech);
-}
-```
-### Breaking Loops
-Just like with switch statements, we can use a break statement to exit our loop and allow the computer to move on to the rest of your code.
-This becomes very useful when pairing loops with conditional statements.
-Take a look at the example project forLoop in VSCode.
-
-```js
-const cATechs = [“Hannah”, “Hannah-Louise”, “Tanje”, “Linards”, “Tracey”, “Matthew”];
-
-for (const tech of cATechs) {
-	console.log(tech);
-	if (tech === “Tanje”{
-		break;
-	}	
+    bio() {
+        console.log(`Hi! I'm ${this.name}`);
+    }
 }
 ```
 
-We can also use continue statements to skip over the current iteration of a loop and move on to the next one.
-In this example, the loop will write each technician’s name to the console – except for “Will”, who is skipped.
+We now have a class, Technician, with:
+- Two properties – Name and Subject
+- A constructor with parameters to initialize each of our properties when we create a new object
+- A bio() method which uses this.name to access the object's name property.
+
+We can now use our constructor to create new class instances!
 
 ```js
-const cATechs = [“Hannah”, “Hannah-Louise”, “Will”, “Tanje”, “Linards”, “Tracey”, “Matthew”];
+const hannah = new Technician("Hannah", "Creative Technology");
 
-for (const tech of cATechs) {
-	if (tech === “Will”{
-	       continue;
-	}
-	console.log(tech);
-}
+hannah.bio(); // returns "Hi! I'm Hannah"
 ```
 
-### While… and Do… while loops
-While… loops are similar to a for loop, but with a different syntax structure.
-Here, our loop is running only while our condition is true: we’re setting more of a starting condition than an ending one.
-Do… while loops are again very similar, but with one key difference: a Do… while loop will always run at least once. This is because the condition sits inside the loop after  the code block.
+### Inheritance
 
-```js
-// While Loop Begins:
-let i = 2;
-while ( i < 1024) {
-	console.log(i);
-	i * 2;
-}
+Let's imagine that we now want to add academic staff into our previous example. 
+They will share some properties with technicians, like name and bio, but they aren't based in a workshop and have a course they teach. However, they are the same type of thing – staff.
 
-// Do… while Loop Begins:
-let i = 2;
-do {
-	console.log(i);
-	i * 2;
-} while ( i < 1024);
-```
-### Which loop should I use?
 
-For the most part, you can use for and while loops interchangeably. However, there’s a couple of occasions where it matters:
+### OOP and JavaScript
+We've looked at some key features of Class-based OOP, and how JavaScript uses them. But we should remember that JS is an anomaly compared to languages like C++.
 
-My loop must run at least once
-Use a Do… While loop.
 
-I need to loop through an iterable (e.g. an Array, a Set, etc.)
-Use a For/For… of loop.
+<Card title="Standard OOP">
+- Classes and objects are entirely separate entities
+- Objects are always created as instances of classes
+- The syntax used to define a class is distinct from a constructor
+</Card>
 
-### Infinite Loops
-
-When using any loop in your code, you must always make sure your initialiser is incremented or decremented, so that the loop will eventually end.
-Otherwise, your loop will never end – leading to browser forced stops or crashes.
-We call these errors infinite loops.
-
-```js
-let i = 2;
-while ( i < 1024) {
-	console.log(i);
-	//i * 2;
-}
-```
-
-## What is an Iterable?
-
-We’ve already talked a bit about creating loops for a collection or group of data items.
-These collections are called Iterables – they’re a singular object, but made up of multiple parts.
-Some built-in iterators in JS include Strings, Arrays, Sets, and Maps.
-
-```js
-// We can iterate over each character of a string:
-let iter = “A String is an iterable Object”;
-// We can iterate over each item in an Array:
-const iter = [ ”Cheese”, “Yoghurt”, “Chocolate”, “Cream”, “Ice Cream”];
-// We can iterate over elements of a Set:
-const iter = new Set ([“a”,”b”,”c”]);
-//We can also iterate over elements of a Map:
-const iter = new Map ([
-[”Cheese”, 10]
-[“Yoghurt”, 20],
-[“Chocolate, 25],
-]);
-```
-
-### FizzBuzz: Practical Exercise
-Using JavaScript, create a program that logs the numbers from 1-100.
-
-Replace every multiple of 3 with the word Fizz.
-
-Replace every multiple of 5 with the word Buzz.
-
-Replace every multiple of both 3 and 5 with the word Fizzbuzz.
+<Card title="JavaScript">
+- We can create Objects without a class definition at will, by creating Object literals or using constructor functions.
+- Constructors are more flexible
+- Working with objects is far easier and more lightweight in JavaScript.
+</Card>

@@ -1,5 +1,5 @@
 ---
-title: "JavaScript 4: String & Number Methods"
+title: "JavaScript 4: Functions, Loops, Iterables"
 description: "Part 4 of the CTL's JavaScript Introduction."
 template: splash
 ---
@@ -9,277 +9,343 @@ import { Aside } from "@astrojs/starlight/components";
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import { FileTree } from '@astrojs/starlight/components';
 
-## Introduction
+## Functions Revisited
 
-This session is all about digging a little further into how we can make strings and numbers
-work for us in JavaScript. By the end of the session we should be comfortable with:
+A few quick questions to check we all remember last week's section on Functions:
 
-- Embedding expressions (variables/constants) into our strings
-- Slicing up and joining together strings
-- Using the Math object and its methods to perform calculations
-- Converting strings to numbers, and vice versa
+<details>
+<summary>What is the difference between a Function and a Method?</summary>
+A Method is a type of function directly attached to an Object.
+</details>
+<details>
+<summary>What makes a function expression different from a function declaration?</summary>
+We don't have to give our function a name if we use a function expression.
+</details>
+<details>
+<summary>Name 2 key elements we need in a function expression/declaration.</summary>
+The function keyword; parameter parentheses.
+</details>
 
-### String Methods
-
-- We can use most values
-in JavaScript as if they
-were objects, even when
-they’re not the Object
-data type.
-
-- This holds true to Strings
-too – as such, there are
-plenty of properties and
-methods for strings we
-can make use of.
+There are three things wrong with this code. What are they?
 
 ```js
-const string = "Strings are awesome!";
+let isSnowing = true;
 
-string.length; //returns 20
-string[20]; //returns “!”
-string.includes("some"); //returns True
-string.indexOf("some"); //returns 15
+const snowcheck = function {
+	isSnowing ? "It is snowing!":"It is not snowing.";
+}
+
+console.log(snowcheck());
 ```
-
-### String Interpolation
-- When we create a variable
-in JS, we’re often using it as
-a dynamic placeholder value.
-- Often, we’ll want to include
-that placeholder inside a
-string, so that the text
-changes when our variable
-does.
-- We call this practice string
-interpolation.
 
 ```js
-let myName = "Hannah";
-let greeting = `Hi! My name is ${myName}.`;
+let isSnowing = true;
 
-console.log(greeting);
-// returns "Hi! My name is Hannah."
+const snowCheck = function() {
+return isSnowing ? "It is snowing!":"It is not snowing.";
+}
 
-myName = "Alex";
-
-console.log(greeting)
-// returns "Hi! My name is Alex."
+console.log(snowCheck());
 ```
 
-### Template Literals
-- We can perform string interpolation using a Template Literal.
-- To create a template literal, we use the backtick ( ` ) to start and finish instead of speech marks.
-- To add in our expression, we use $, followed by our expression inside curly braces { }.
+### Function Parameters
 
 ```js
-let templateLiteral = `We are adding an ${expression} into our String.`;
+// The Math.random() method does not require parameters:
+Math.random();
+
+// our quickMaths() function from last session needed two:
+const quickMaths = function(a, b) {
+    return a * b;
+}
+quickMaths(3,5);
 ```
 
-We can also use template literals to write multi-line strings, like this:
+- Parameters are the values we need to pass into the function so it can work properly.
+- Parameters aren't necessary for every function, but even if we have no parameters, we still need to put the empty parentheses.
+- Some in-built functions in JS will have default parameters that will be used if none are given.
+
+#### Other names for Parameters you might see:
+- Arguments
+- Properties
+- Attributes
+
+### Default Parameters
+- In this example, the .toSorted() method expects us to provide a function as a parameter. If we don't, it just sorts the array into alphabetical order.
+- If you're building your own functions and would like to include a default value, you can do this by adding it into the parameter parentheses when you declare your function.
+
+### Anonymous Functions
+A lot of the functions you'll see will have names, but not all of them.
+
+- We can create anonymous functions without giving a name.
+- We've seen this before – this is function expression. 
+- Until now, we've only used function expression to create a function inside a variable, but we don't have to do it that way.
+- Anonymous functions are often used when a function is being used as a parameter for another function, like in the previous example.
 
 ```js
-console.log( `first line of my string
-second line of my string` );
+// named function declaration
+function iAmTired() {
+	console.log(“It's too early for teaching.”);
+}
 
-//returns
-//”first line of my string
-//second line of my string”
+//anonymous function expression
+(function () {
+	console.log(“It's too early for teaching.);
+});
 ```
 
-### Strings as iterables
-Remember – just like arrays, strings are iterable. This means that each character in the
-string has an index, starting from 0.
+Let's put this into context with an example.
 
-We can access individual characters in our string by accessing their index with bracket
-notation. We can also use indexOf() to look up a character’s index if we need to.
+- The addEventListener() method requires two parameters from us:
+  - an event to listen out for
+  - a function to run when it happens
+- Open up anonymousFunctions.js and its accompanying HTML file in VSCode.
+- You'll see a declared function, logKey(), and addEventListener().
 
 ```js
-const string = “Strings are awesome!”;
-string[20]; //returns “!”
-string.indexOf(“some”); //returns 15
+function logKey(event) {
+alert(`You pressed "${event.key}".`);
+}
+addEventListener(“keydown”, logKey);
 ```
 
-### Substrings
-Sometimes, we may want to know if a string contains a smaller string – like if a sentence contains a certain word. We call these smaller strings Substrings.
-
-We can look for a substring by using the includes() method.
+- Instead of using a declaration, we can create an anonymous function directly inside the parentheses of addEventListener().
+- We might choose to do this for a few reasons: tidiness; performance optimisation; or simply because we only need to use this function once.
+- It's worth remembering that function expressions can only be used once defined, and are often invoked immediately unless stored in a variable.
 
 ```js
-let myString = "Pineapple!";
-myString.includes("apple") ? console.log ("Apples found!") : console.log("No apples found.");
+addEventListener(“keydown”, function (event) {
+	alert(`You pressed "${event.key}".`;
+});
 ```
 
-### Extracting Substrings
-We can also extract a substring from a larger string using the slice() method.
-slice() takes two arguments:
-
-- Starting index of the substring (substring begins after this index)
-- Ending index of the substring (substring ends after this index)
+### Arrow Functions
+- Arrow functions are an alternate way to write function expressions.
+- They're seen more often in more advanced JS frameworks, but it's good to know what they look like for reference.
+- With arrow functions, we remove the function keyword.
 
 ```js
-const string = “Strings are awesome!”;
-let substring = string.slice(12, 19);
-console.log(substring); //returns “awesome”
-10 JavaScript: String &
+hello = function() {
+	console.log(“Hello World!”);
+	return “Hello World!”;
+}
+
+hello = () => {
+    console.log(“Hello World!”);	
+    return “Hello World!”;
+}
 ```
 
-### Updating substrings
-We can also switch out a
-substring by using replace().
-Again, we pass in two arguments:
-
-- The substring we want to
-replace
-- The substring we want to
-replace it with
-
-Note that this creates a new
-string rather than modifying the
-original – this is very common for
-string methods.
+If our function takes parameters, we would add them like this:
 
 ```js
-const string = “Strings are awesome!”;
-let stringUpdate = string.replace(“awesome”, “brilliant”);
-console.log(stringUpdate); //returns “Strings are brilliant!”
+quickMaths = function(a, b){
+	return a*b;
+}
+
+quickMaths = (a, b) => a*b;
 ```
 
-### String Concatenation
-So, we know how to cut up a string – but what about joining them together?
-We can perform String concatenation in two ways:
+If our function only has one parameter, we can also remove the parentheses.
 
 ```js
-const string1 = “Pine”;
-const string2 = “apple”;
-string1.concat(string2); //Returns “Pineapple”
-“”.concat(string1, string2); //Returns “Pineapple”
-string1 + string 2; //Returns “Pineapple”
+quickMaths = function(a) {
+	return 2 * a;
+}
+
+quickMaths = a => 2 * a;
 ```
 
-### concat()
-The concat() method is probably the safest way to merge strings, because it will convert other data
-types directly into strings – a process called string coercion – before joining them together.
-We can also create a string from array items pretty easily using concat().
+### Return Values
+
+- Return values are the values a function passes out when it's finished running. 
+- Returns are mostly used when a function is part of a wider task, like multi-step calculations.
+- You don't have to have a return value in a function if you don't need it.
+- To return a value, just use the return keyword.
 
 ```js
-// The … used in this example is
-// called spread syntax. We use it to
-// quickly pass all elements of an
-// array or object into a function
-// when we invoke it.
+function random() {
+    return Math.floor(Math.random() * 100);
+}
 
-const myArray = [ “hi,”, “ “, “I’m” , “ “, ”Hannah”, “.”];
-let greeting =
-“”
-.concat(...myArray);
-console.log(greeting); //Returns ”hi, I’m Hannah.”
+let randomNumAnnouncer = function() {
+    alert(`Today/'s random number is ${random()}! `);
+}
+
+randomNumAnnouncer();
 ```
 
-### Addition operator
-We can also join strings together using our addition operator (+). If one of our values isn’t already a string, JavaScript will use primitive coercion to convert it.
+### Scope
+
+- All the variables and other things we create inside a function are inaccessible by code outside the function. This is called function scope.
+- Variables and values defined outside a function are called Global variables, and can be accessed from anywhere in your script.
+
+Take a look at the functionScope.js file in your VSCode project. 
+See how we are able to use the inStock boolean inside our function? Because it's defined outside of a function, it has global scope, so we can use it anywhere in our file.
+
+However, because the teaOptions array only has function scope, we cannot add new items to it outside the function. We can refer to these variables as local variables.
+If you check your browser console, you should see a ReferenceError appear once you close the alert.
+
+ES6 Introduced a new type of scope, block scope, which prevents let and const variables from being accessed from outside a { } block.
+Since local variables are destroyed when a function ends, we can use the same name for variables across different functions.
+It's good practice to use as few global variables as possible – both for security reasons and to avoid potential code conflicts.
 
 ```js
-console.log( ”Hi,” + “ “ + “my” + “ “ + “name” + “ “ + ”is” + “ “ + “Hannah” + “ “ +
-“and” + “ “ + “I’m” + “ “ + 29 + “ “ + “years” + “ “ + “old.”)
-//Returns “Hi, my name is Hannah and I’m 29 years old.”
+// Cannot be accessed here
+{
+    let x = 4;
+    const Y = 5;
+// Can be accessed here
+}
+//Cannot be accessed here
 ```
 
-### The Math Object
-The Math object in JavaScript is what we call a static object. This means it has no constructor – we can’t create new instances of the Math object. We access its properties and methods with dot notation, just like with other objects. Math only works with the number data type.
+## Loops
+
+Sometimes, we need to repeat an action in code multiple times in order to get our desired result.
+Not only would writing out the same block of code multiple times take ages, it would be terrible for readability and troubleshooting, and leave us prone to more human error.
+This is why we use loops to run code multiple times.
 
 ```js
-// Common Properties
-Math.PI
-Math.E
-Math.LN2
-Math.SQRT2
+let i = 1;
 
-// Common Methods
-Math.ceil()
-Math.floor()
-Math.round()
-Math.random()
-Math.max()
-Math.min()
+console.log(i);
+i = i++;
+console.log(i);
+i = i++;
+console.log(i);
+i = i++;
+console.log(i);
+i = i++;
+
+for (let i = 1; i<=10; i++) {
+    console.log(i);
+}
 ```
 
-### Rounding Numbers
-When we have a float number we want to round to an integer, we will
-need to use the Math Object. There are 3 methods we can choose from:
+### for loops
+Let's break down what's going on here:
+We start off with the for keyword.
 
 ```js
-Math.floor(42.8405); //returns 42
-
-Math.ceil(42.8405); //returns 43
-
-Math.round(42.8405); //returns 43
+for (let i = 1; i<=10; i++) {
+    console.log(i);
+}
 ```
 
-### Random Numbers
-Math.random() will always return a random value between 0 (including 0) and 1 (excluding 1).
-To generate a random number > 1, you will need to create a more complex function that
-multiplies Math.random() with another value.
-Always use Math.floor() when rounding Math.random().
+We then have 3 values in the parentheses, separated with semicolons:
 
-Note: Do NOT use Math.random()
-for anything security-related, as its
-results are not cryptographically
-secure.
+This first value is the initialiser, or counter variable. We increment this variable to set how many times our loop will run. 
+
+We then have a condition – this is the condition that defines when the loop stops. Here, our counter loops as long as i is less than or equal to 10.
+
+Lastly, we have the final expression. This will run every time the loop finishes; in our case, it increases i by 1 each time.
+
+We then have whatever code block we want to loop within curly brackets.
+
+### for... of loops
+Often when we're using loops, we're looking to loop through a list of items in a collection rather than just looping a set number of times.
+This is where we can use a for… of loop. This kind of loop will use the number of items in a collection as its guide for how many loops to complete.
 
 ```js
-function getRandomInt(min, max) {
-	const minCeil = Math.ceil(min);
-	const maxFloor = Math.floor(max);
-	return Math.floor(Math.random() * (maxFloor – minCeil) + minCeil);
-};
+const cATechs = [“Hannah”, “Hannah-Louise”, “Tanje”, “Linards”, “Tracey”, “Matthew”];
 
-getRandomInt( 0, 158.539) // Returns 59
+for (const tech of cATechs) {
+	console.log(tech);
+}
 ```
-
-
-### Maximum and Minimum values
-We use Math.max() and Math.min() to find the minimum and maximum values from a
-collection of numbers.
-
-You’re likely to see these used to find min and max values within an array. We can use
-spread syntax to quickly pass in the whole array as method arguments.
+### Breaking loops
+Just like with switch statements, we can use a break statement to exit our loop and allow the computer to move on to the rest of your code.
+This becomes very useful when pairing loops with conditional statements.
+Take a look at the example project forLoop in VSCode.
 
 ```js
-Math.min(1, 2, 3); //returns 1
-Math.max(1, 2, 3); //returns 3
+const cATechs = [“Hannah”, “Hannah-Louise”, “Tanje”, “Linards”, “Tracey”, “Matthew”];
 
-const numArray = [36, 258, 3, 65, 280, 3.6829, 23, 19048];
-Math.min(…numArray); //returns 3
-Math.max(…numArray); //returns 19048
+for (const tech of cATechs) {
+	console.log(tech);
+	if (tech === “Tanje”{
+		break;
+	}	
+}
 ```
 
-### Converting Strings to Numbers
-We have a few ways we can convert strings into numbers:
-- The Number() constructor (with or without the new keyword)
-- The parseInt() and parseFloat() functions
+We can also use continue statements to skip over the current iteration of a loop and move on to the next one.
+In this example, the loop will write each technician's name to the console – except for “Will”, who is skipped.
 
 ```js
-let num = ”163.85”;
+const cATechs = [“Hannah”, “Hannah-Louise”, “Will”, “Tanje”, “Linards”, “Tracey”, “Matthew”];
 
-Number(num); //returns 163.85
-parseInt(num); //returns 163
-parseFloat(num); //returns 163.85
+for (const tech of cATechs) {
+	if (tech === “Will”{
+	       continue;
+	}
+	console.log(tech);
+}
 ```
 
-### Converting Numbers to Strings
-We’ve talked a bit about how JS converts other data types to strings during
-concatenation, but not how to do this generally.
-For that, we’ll use the toString() method.
+### While… and do… while loops
+While… loops are similar to a for loop, but with a different syntax structure.
+Here, our loop is running only while our condition is true: we're setting more of a starting condition than an ending one.
+Do… while loops are again very similar, but with one key difference: a Do… while loop will always run at least once. This is because the condition sits inside the loop after  the code block.
 
 ```js
-let num = 268;
-const arr = [1, 2, 3];
+// While Loop Begins:
+let i = 2;
+while ( i < 1024) {
+	console.log(i);
+	i * 2;
+}
 
-num.toString(); //returns “268”;
-arr.toString(); //returns “1, 2, 3”
+// Do… while Loop Begins:
+let i = 2;
+do {
+	console.log(i);
+	i * 2;
+} while ( i < 1024);
 ```
 
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number
-- https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion
-- https://www.youtube.com/watch?v=x16Z_U1tGrc
+### Which loop should I use?
+
+For the most part, you can use for and while loops interchangeably. However, there's a couple of occasions where it matters:
+
+My loop must run at least once
+Use a Do… While loop.
+
+I need to loop through an iterable (e.g. an Array, a Set, etc.)
+Use a For/For… of loop.
+
+### Infinite Loops
+
+When using any loop in your code, you must always make sure your initialiser is incremented or decremented, so that the loop will eventually end.
+Otherwise, your loop will never end – leading to browser forced stops or crashes.
+We call these errors infinite loops.
+
+```js
+let i = 2;
+while ( i < 1024) {
+	console.log(i);
+	//i * 2;
+}
+```
+
+## What is an Iterable?
+
+We've already talked a bit about creating loops for a collection or group of data items.
+These collections are called Iterables – they're a singular object, but made up of multiple parts.
+Some built-in iterators in JS include Strings, Arrays, Sets, and Maps.
+
+```js
+// We can iterate over each character of a string:
+let iter = “A String is an iterable Object”;
+// We can iterate over each item in an Array:
+const iter = [ ”Cheese”, “Yoghurt”, “Chocolate”, “Cream”, “Ice Cream”];
+// We can iterate over elements of a Set:
+const iter = new Set ([“a”,”b”,”c”]);
+//We can also iterate over elements of a Map:
+const iter = new Map ([
+[”Cheese”, 10]
+[“Yoghurt”, 20],
+[“Chocolate, 25],
+]);
+```

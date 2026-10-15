@@ -23,10 +23,12 @@ export default defineConfig({
                 label: 'Guides',
                 items: [
                     // Each item here is one entry in the navigation menu.
+                    { label: 'Introduction to HTML', slug: 'guides/github' },
                     { label: 'Introduction to HTML', slug: 'guides/html' },
-                    { label: 'Introduction to CSS', slug: 'guides/css' },
+                    { label: 'Introduction to CSS', slug: 'guides/css-1' },
                     { label: 'Introduction to CSS 2', slug: 'guides/css-2' },
-                    { label: 'Introduction to JavaScript', slug: 'guides/javascript' },
+                    { label: 'Introduction to JavaScript: Part 1', slug: 'guides/javascript-1' },
+                    { label: 'Introduction to JavaScript: Part 2', slug: 'guides/javascript-2' }
                 ],
             }
         ],
