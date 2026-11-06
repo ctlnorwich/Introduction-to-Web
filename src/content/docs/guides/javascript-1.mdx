@@ -20,25 +20,27 @@ from "~/code/javascript.js"
 
 ## What is JavaScript?
 
-JavaScript was created in 1995 to add interactivity to the web. Since then, it has become an incredibly versatile programming language with a wide range of uses, from websites and apps to games, control panels and generative art.
+JavaScript was created in 1995 to add interactivity to the web. Since then, it has become an incredibly versatile programming language with a wide range of uses, from websites, apps and games to spacecraft control panels and generative art.
 
-Whilst it's possible to use JavaScript for **declarative** programming, it's primarily used as an **imperative** language, where developers outline each step the computer must take in order to achieve the desired result.
+Although JavaScript can be used in a **declarative** way, it's primarily used as an **imperative** programming language where developers outline each step the computer must take in order to achieve the desired result.
 
 While JavaScript was intially developed as a **client-side** language, it is also used (mainly via Node.js) on the **server-side**, or in modern **serverless** cloud architecture. This makes JavaScript a truly a versatile and valuable language to learn. However, JavaScript is not without its idiosyncrasies: what goes for JavaScript may not go for other more 'conventional' programming languages!
 
-JavaScript is an **object-oriented language.** We'll talk a bit more about that means later.
+JavaScript is an **object-oriented language.** We'll talk a bit more about what that means later.
 
 :::note[Useful Links]{icon="heart"}
 - [MDN JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [Go Make Things - Vanilla JS guides](https://gomakethings.com/guides/)
+- [Free Code Camp - JavaScript for Beginners](https://www.freecodecamp.org/news/full-javascript-course-for-beginners/)
+- [Traversy Media - Modern JavaScript 12-hour video!](https://www.youtube.com/watch?v=BI1o2H9z9fo)
 - [JavaScript30 - Classic free course by Wes Bos](https://javascript30.com/)
 - [State of JavaScript](https://stateofjs.com/en-US)
 :::
 
 ### JavaScript Versions & Standards
 
-- Like with the other languages we've covered already, JavaScript receives version updates that are released every year or so.
-- JavaScript adhers to the ECMAScript (ES) specification, so versions refer to ES instead of JS.
+- JavaScript receives version updates that are released every year or so.
+- JavaScript adhers to the ECMAScript (ES) specification, so versions refer to ES instead of JS. ECMA stands for European Computer Manufacturers Association.
 - You may have heard of ES6. This version of JS came out in 2015. After this, versions were named by year (e.g. ECMAScript 2016, ECMAScript 2017, etc.)
 - Features available in newer versions will obvioulsy not work in older web browsers. It's wise to use a version that's at least a couple of years old, unless you really need a specific new feature. 
 - Developers often use polyfills to provide approximate fallbacks if a new native feature is not supported.
@@ -51,8 +53,8 @@ JavaScript is an **object-oriented language.** We'll talk a bit more about that 
 
 ### The .js file
 
-- Just like with CSS, JavaScript can be inserted straight into HTML using the `<script>` tag, but this is not necessarily best practice.
-- Instead, create a `.js` file somewhere in your project directory, then add a link to it in your HTML within the `<head>` of the page using the `defer` attribute to make sure it loads after the html has loaded.
+- Just like with CSS, JavaScript can be inserted straight into HTML using the `<script>` tag, but this is not necessarily the best thing to do, especially if you have a lot of code to add.
+- Instead, create a `.js` file somewhere in your project directory, then add a link to it in your HTML within the `<head>` of the page using the `defer` attribute to make sure it loads after the html has loaded. You can also place it just before the closing `</body>` tag to ensure it loads after the rest of your html. If your JS is not working, it's always worth checking first that it's loading at the right time!
 
 ```js
 <script src="script.js" defer></script>
@@ -60,17 +62,42 @@ JavaScript is an **object-oriented language.** We'll talk a bit more about that 
 
 ## Variables
 
-- String: `"Helloooooo Norwich!"`
-- Number: `42`
-- Boolean: `true`
-- Bigint: `999999999999999n`
-- Object / Array: `["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]`
-- Object / Object: `{ keyHere: "Value here. In this case, the value is a string" }`
-- Symbol: `Symbol("description")`
-- Undefined: `undefined`
-- Null: `null`
+When we're programming, we inevitably come across values or data we'll need to use again later. We can store these bits of data to call upon in other parts of our script. We call these stored values **variables**. There are 8 types of data available to us in JavaScript, and any of them can be made into a variable (note that the 'Object' type has various object types, two of which are shown here).
 
-When we're programming, we inevitably come across values or data we'll need to use again later. We can store these bits of data to call upon in other parts of our script. We call these stored values **variables**. There are 8 types of data available to us in JavaScript, and any of them can be made into a variable.
+```js
+// Number
+let magicNumber = 3;
+let price = 12.99;
+
+// Strings
+let shoutOut = "Hello Norwich!"
+
+// Boolean
+let isOpen = true;
+
+// Undefined
+let shoutOut;
+let price;
+
+// Null
+let currentQuestion = null;
+let total = null;
+
+// BigInt
+let veryLargeNumber = 1234567890123456789012345n;
+
+// Symbol
+const userID = Symbol("id");
+
+// Object
+const myObject = {mySringKey:"My Value", myNumberKey:42};
+
+// Array Object
+const rainbowColours = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"];
+
+// Date Object
+const date = new Date("2026-11-10");
+```
 
 ### Declaring a variable
 
@@ -80,14 +107,15 @@ let taskPriority;
 let isComplete;
 ```
 
-Note that each line ends with a semicolon. It's safer to write all JS instructions this way. You don't absolutely have to, but then you have to rely on line breaks to determine where your instruction ends and the next one begins.
+Note that each line ends with a semicolon. It's safer to write all JS instructions this way. You don't absolutely have to, but you'll have to rely on line breaks to determine where your instruction ends and the next one begins.
 
-It's good practice in JS for variable names to be written in camelCase.
-      
-- We have to declare our variable in order to use it. We do this by using the keyword, followed by our variable's name.
-- The original keyword for declaring a variable is `var`. Don't use this on new projects, but you may see it in older examples and documentation.
+It's good practice in JS for variable names to be written in camelCase. Dashes are not allowed!
+
+- We have to **declare** our variable in order to use it. We do this by using the keyword, followed by our variable's name.
+- The original keyword for declaring a variable is `var`. Don't use this on new projects, but you will probably see it a lot in older examples and documentation.
 - We now have `let` and `const`. Use `let` if you want to update the value. Use `const` if you want the value to be a 'constant' and protected from being updated.
-- Unlike a lot of other programming languages, you don't have to declare a variable's datatype in JavaScript.
+- Unlike a lot of other programming languages, you don't have to declare a variable's datatype in JavaScript. 
+- There is a version of JavaScript called TypeScript (created by Microsoft), which forces you to declare and adhere to types (this is known as a type-safe language). TypeScript is stricter as well as being more complex and verbose, but it is popular with professional developers because it catches errors and makes code more robust.
 
 ### Initialising a variable
 
@@ -97,8 +125,8 @@ let taskPriority = 1;
 let isComplete = false;
 ```
 
-- Now we have variables, we need to give them values. This is what we call initialising the variable.
-- To make things easier, we can declare and initialise a variable at the same time, as shown here.
+- Now we have variables, we need to give them values. This is what we call **initialising** the variable.
+- To make things easier, we can declare and initialise a variable at the same time, as shown above.
 - We're using `let` keyword so we can change the value if we want to.
 
 <div class="not-content">
@@ -116,8 +144,8 @@ taskName = "Learn JavaScript";
 taskName = null;
 ```
 
-- Once we've initialised a variable using `let`, we can update it pretty easily simply by giving it a new value further down our code.
-- Remember, JavaScript is very flexible with data types, so we can update our variable with a different data type if we need to. This can be more of a problem than an advantage! 
+- Once we've initialised a variable using `let`, we can update it pretty easily simply by giving it a new value further down our code. This is a simple but powerful feature.
+- Remember, JavaScript is very flexible with data types, so we can update our variable with a different data type if we need to. This can often be more of a problem than an advantage! 
 
 ### Why use const instead of let?
 
@@ -173,7 +201,7 @@ console.log(taskName);
   </code-sandbox>
 </div>
 
-- In the `script.js` file above, create a variable called `myName`, and initialise it with a value.
+- In the sandbox above, create a variable called `myName`, and initialise it with a value.
 - Save your code and take a look how the greeting on our `index.html` page changes!
 - Add in some comments to `script.js` to describe our code.
 - Underneath your variable, re-assign `myName` and give it a new value.
