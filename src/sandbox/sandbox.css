@@ -189,11 +189,15 @@
 }
 
 .sandbox-console-log {
+	color: #f7f7f7;
 	font-family: Menlo, Monaco, "Courier New", monospace;
 	font-size: 0.875em;
 	min-height: 1.2em;
 	white-space: pre-wrap;
 	tab-size: 2;
+	padding: 0.5rem;
+	background: black;
+	border-radius: 0.25em;
 }
 
 

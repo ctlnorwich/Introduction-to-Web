@@ -20,11 +20,11 @@ from "~/code/javascript.js"
 
 ## What is JavaScript?
 
-JavaScript was created in 1995 to add interactivity to the web. Since then, it has become an incredibly versatile programming language with a wide range of uses, from websites, apps and games to spacecraft control panels and generative art.
+JavaScript was created in 1995 to add interactivity to the web. Since then, it has become an incredibly versatile programming language with a wide range of uses, from websites, apps and games to control panels and generative art.
 
-Although JavaScript can be used in a **declarative** way, it's primarily used as an **imperative** programming language where developers outline each step the computer must take in order to achieve the desired result.
+Although JavaScript can be used in a **declarative** way (like HTML and CSS), it's primarily an **imperative** programming language, which means you need to outline each step the computer must take in order to achieve a desired result.
 
-While JavaScript was intially developed as a **client-side** language, it is also used (mainly via Node.js) on the **server-side**, or in modern **serverless** cloud architecture. This makes JavaScript a truly a versatile and valuable language to learn. However, JavaScript is not without its idiosyncrasies: what goes for JavaScript may not go for other more 'conventional' programming languages!
+While JavaScript was intially developed as a **client-side** language, it is also used (mainly via Node.js) on the **server-side**, or in modern **serverless** cloud architecture. This makes JavaScript a truly a versatile and valuable 'full-stack' language to learn. However, JavaScript is not without its quirks and oddities: what goes for JavaScript may not go for other more 'conventional' programming languages!
 
 JavaScript is an **object-oriented language.** We'll talk a bit more about what that means later.
 
@@ -32,7 +32,7 @@ JavaScript is an **object-oriented language.** We'll talk a bit more about what 
 - [MDN JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [Go Make Things - Vanilla JS guides](https://gomakethings.com/guides/)
 - [Free Code Camp - JavaScript for Beginners](https://www.freecodecamp.org/news/full-javascript-course-for-beginners/)
-- [Traversy Media - Modern JavaScript 12-hour video!](https://www.youtube.com/watch?v=BI1o2H9z9fo)
+- [Traversy Media - JavaScript crash course on YouTube](https://www.youtube.com/watch?v=hdI2bqOjy3c)
 - [JavaScript30 - Classic free course by Wes Bos](https://javascript30.com/)
 - [State of JavaScript](https://stateofjs.com/en-US)
 :::
@@ -41,12 +41,12 @@ JavaScript is an **object-oriented language.** We'll talk a bit more about what 
 
 - JavaScript receives version updates that are released every year or so.
 - JavaScript adhers to the ECMAScript (ES) specification, so versions refer to ES instead of JS. ECMA stands for European Computer Manufacturers Association.
-- You may have heard of ES6. This version of JS came out in 2015. After this, versions were named by year (e.g. ECMAScript 2016, ECMAScript 2017, etc.)
+- ES6 came out in 2015. After this, versions were named by year (e.g. ECMAScript 2016, ECMAScript 2017, etc.)
 - Features available in newer versions will obvioulsy not work in older web browsers. It's wise to use a version that's at least a couple of years old, unless you really need a specific new feature. 
-- Developers often use polyfills to provide approximate fallbacks if a new native feature is not supported.
+- Developers often use polyfills to provide approximate fallbacks if a user's browser does not support a new feature.
 
 :::note[What we'll need:]
-- A code editor (e.g. VS Code or WebStorm)
+- A code editor (e.g. VS Code, WebStorm, Notepad++)
 - A reference guide (e.g [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript))
 - Some prior knowledge of HTML and CSS
 :::
@@ -54,7 +54,7 @@ JavaScript is an **object-oriented language.** We'll talk a bit more about what 
 ### The .js file
 
 - Just like with CSS, JavaScript can be inserted straight into HTML using the `<script>` tag, but this is not necessarily the best thing to do, especially if you have a lot of code to add.
-- Instead, create a `.js` file somewhere in your project directory, then add a link to it in your HTML within the `<head>` of the page using the `defer` attribute to make sure it loads after the html has loaded. You can also place it just before the closing `</body>` tag to ensure it loads after the rest of your html. If your JS is not working, it's always worth checking first that it's loading at the right time!
+- Instead, create a `.js` file somewhere in your project directory, then add a link to it in your HTML within the `<head>` of the page using the `defer` attribute to make sure it loads after your html. You can also place it just before the closing `</body>` tag, but nowadays `defer` is a better option. If your JS is not working, it's always worth checking first that it's loading at the right time!
 
 ```js
 <script src="script.js" defer></script>
@@ -62,7 +62,7 @@ JavaScript is an **object-oriented language.** We'll talk a bit more about what 
 
 ## Variables
 
-When we're programming, we inevitably come across values or data we'll need to use again later. We can store these bits of data to call upon in other parts of our script. We call these stored values **variables**. There are 8 types of data available to us in JavaScript, and any of them can be made into a variable (note that the 'Object' type has various object types, two of which are shown here).
+When we're programming, we inevitably come across values or data we'll need to use again later. We can store these bits of data to call upon in other parts of our script. We call these stored values **variables**. There are 8 **types** of data available to us in JavaScript, and any of them can be made into a variable (note that the 'Object' type has various subtypes, two of which are shown here).
 
 ```js
 // Number
@@ -83,20 +83,21 @@ let price;
 let currentQuestion = null;
 let total = null;
 
-// BigInt
+// BigInt - you probably won't need to use this!
 let veryLargeNumber = 1234567890123456789012345n;
 
-// Symbol
+// Symbol - you probably won't need to use this!
 const userID = Symbol("id");
 
 // Object
 const myObject = {mySringKey:"My Value", myNumberKey:42};
 
 // Array Object
-const rainbowColours = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"];
+const rainbow = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 
 // Date Object
 const date = new Date("2026-11-10");
+const currentDate = new Date.now();
 ```
 
 ### Declaring a variable
@@ -107,34 +108,25 @@ let taskPriority;
 let isComplete;
 ```
 
-Note that each line ends with a semicolon. It's safer to write all JS instructions this way. You don't absolutely have to, but you'll have to rely on line breaks to determine where your instruction ends and the next one begins.
+Note that each line ends with a semicolon. It's safer to write all JS instructions this way. You don't absolutely have to, but you'll need to rely on line breaks to determine where an instruction ends and the next one begins.
 
 It's good practice in JS for variable names to be written in camelCase. Dashes are not allowed!
 
-- We have to **declare** our variable in order to use it. We do this by using the keyword, followed by our variable's name.
+- We have to **declare** our variable in order to use it. We do this by using a keyword, followed by our variable's name.
 - The original keyword for declaring a variable is `var`. Don't use this on new projects, but you will probably see it a lot in older examples and documentation.
 - We now have `let` and `const`. Use `let` if you want to update the value. Use `const` if you want the value to be a 'constant' and protected from being updated.
 - Unlike a lot of other programming languages, you don't have to declare a variable's datatype in JavaScript. 
-- There is a version of JavaScript called TypeScript (created by Microsoft), which forces you to declare and adhere to types (this is known as a type-safe language). TypeScript is stricter as well as being more complex and verbose, but it is popular with professional developers because it catches errors and makes code more robust.
+- There is a version of JavaScript called TypeScript (created by Microsoft), which forces you to declare and adhere to types (this is known as a type-safe language). TypeScript is stricter as well as being more complex and verbose, but it is popular with professional developers because it catches errors, creates clear definitions and makes code more robust.
 
 ### Initialising a variable
 
-```js 
-let taskName = "Learn JavaScript"; 
-let taskPriority = 1;
-let isComplete = false;
+```js
+let taskName = "Learn HTML"; 
 ```
 
 - Now we have variables, we need to give them values. This is what we call **initialising** the variable.
-- To make things easier, we can declare and initialise a variable at the same time, as shown above.
+- To make things easier, we can declare and initialise a variable at the same time, as shown below.
 - We're using `let` keyword so we can change the value if we want to.
-
-<div class="not-content">
-  <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxConsole.html}</textarea>
-    <textarea for="js" open>{sandboxConsole.js}</textarea>
-  </code-sandbox>
-</div>
 
 ### Updating a variable
 
@@ -146,39 +138,6 @@ taskName = null;
 
 - Once we've initialised a variable using `let`, we can update it pretty easily simply by giving it a new value further down our code. This is a simple but powerful feature.
 - Remember, JavaScript is very flexible with data types, so we can update our variable with a different data type if we need to. This can often be more of a problem than an advantage! 
-
-### Why use const instead of let?
-
-The `const` variable keyword stands for 'constant'. It is good practice to use `const` all cases where you know you don't want the value of your variable to ever be overwritten (accidently or otherwise). You must initialise a constant when you declare it since it must have a value straight away.
-
-In the example below, we're using SCREAMING_SNAKE_CASE for the string `const` above, but camelCase for the array `const` below. This helps remind us at a glance which constants cannot be altered throughout the code. You may want to follow this convention, but it is not essential.
-
-While you cannot directy alter the value of a variable declared with `const`, you can alter the contents of that value. For example, if the value is and array, you can still alter the contents of that array. That's why the `taskList` can be updated below.
-
-
-<div class="not-content">
-  <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxConst.html}</textarea>
-		<textarea for="js" open>{sandboxConst.js}</textarea>
-  </code-sandbox>
-</div>
-
-### Adding comments
-
-```js
-let taskName = "Learn React Native"; // Declare taskName 
-let taskPriority = 3;
-let isComplete = false;
-/* the code below will update 
-the isComplete variable */
-isComplete = true;
-// taskPriority = 1;
-```
-
-- We can add comments to help us make our script more readable and explain our code to others.
-- We can also use it to prevent execution of code when troubleshooting or testing alternatives.
-- We can make a comment over a single line using `//`. Anything written after this on the line will be considered a comment.
-- For comments over multiple lines, we use `/*` and `*/` to signal the start and end of a comment.
 
 ### console.log()
 
@@ -192,6 +151,46 @@ console.log(taskName);
 - We can also use `console.warn()` and `console.error()` to output warnings and errors.
 - Activating Developer Tools in a web browser will bring up the console so we can see what's happening on the webpage.
 
+<div class="not-content">
+  <code-sandbox hidden console="open">
+		<textarea for="html">{sandboxConsole.html}</textarea>
+    <textarea for="js" open>{sandboxConsole.js}</textarea>
+  </code-sandbox>
+</div>
+
+### Why use const instead of let?
+
+The `const` variable keyword stands for **constant**. It is good practice to use `const` all cases where you know you don't want the value of your variable to ever be overwritten (accidently or otherwise). You must initialise a constant when you declare it since it must have a value straight away.
+
+While you cannot directy alter the value of a variable declared with `const`, you can alter the contents of that value. For example, if the value is and array, you can still alter the contents of that array. That's why the `taskList` can be updated below.
+
+In the example below, we're using SCREAMING_SNAKE_CASE for the string `const` (the string will never change), but camelCase for the array `const` (the contents of the array might change). This helps remind us at a glance which constants are static and which hold values where the content can be be changed. You may want to follow this convention, but it is not essential.
+
+<div class="not-content">
+  <code-sandbox hidden console="open">
+		<textarea for="html">{sandboxConst.html}</textarea>
+		<textarea for="js" open>{sandboxConst.js}</textarea>
+  </code-sandbox>
+</div>
+
+### Adding comments
+
+```js
+let taskName = "Learn JavaScript"; // Declare taskName 
+let taskPriority = 3;
+let isComplete = false;
+/* the code below will update 
+the isComplete variable */
+isComplete = true;
+// taskPriority = 1;
+```
+
+- We can add comments to help us make our script more readable and explain our code to others.
+- We can also use comments to prevent execution of code when troubleshooting or testing alternatives.
+- We can make a comment over a single line using `//`. Anything written after this on the line will be considered a comment.
+- For comments over multiple lines, we use `/*` and `*/` to signal the start and end.
+
+
 ## Quick practical
 
 <div class="not-content">
@@ -202,11 +201,11 @@ console.log(taskName);
 </div>
 
 - In the sandbox above, create a variable called `myName`, and initialise it with a value.
-- Save your code and take a look how the greeting on our `index.html` page changes!
-- Add in some comments to `script.js` to describe our code.
+- Save your code and take a look how the greeting on our HTML page changes!
+- Add in some comments to the JS to describe our code.
 - Underneath your variable, re-assign `myName` and give it a new value.
 - Now, change `myName` to a `const`.
-- Open up Developer Tools in the browser to enjoy the `SyntaxError` in the console!
+- Open up Developer Tools in the browser to enjoy the `SyntaxError` in the console! For simplicity, these verbose syntax errors are supressed in the Sandbox console, but you can still see them in your browser's console (via Dev Tools). If something isn't working in your sandbox, open your main browser to check for errors. It is a good idea to get into the habit of doing this.
 
 ## Basic maths in JavaScript
 
@@ -222,7 +221,7 @@ typeof myFloat;
 - **Integers** are whole value numbers (e.g. 1, 100, 365, etc.)
 - **Floating-point** numbers (Floats) are numbers with decimal points and places (e.g. 1.5, 3.1415926, 6.9, etc.)
 - Unless your number is extremely large (more than 15 digits), all your numbers will come under the number data type in JS.
-- Number values are written without speech marks. Otherwise, JS will read it as a string!
+- Number values are written **without speech marks**. Otherwise, JS will read it as a string!
 
 
 <div class="not-content">
@@ -234,14 +233,14 @@ typeof myFloat;
 
 - There are many different methods we can use with number values in JS.
 - We can also convert other data values into number types using the `Number()` constructor.
-- This is useful when converting values entered on **HTML forms** - which are strings - into numbers we can calculate with.
+- This is useful when converting values entered on **HTML forms**, which are strings, into numbers we can calculate with.
 - In the above example, if we did not convert `myNumber`, the result would be `"75"`. Once we do, the output becomes `12`.
 
 ### Arithmetic operators
 
 Remember that the standard order of operation for mathematics still applies in JavaScript!
 
-- The way we make calculations in JavaScript is by using **arithmetic operators**; most of these will already likely be familiar to you.
+- The way we make calculations in JavaScript is by using **arithmetic operators**.
 - The **eModulo** operator will divide the number on the left by the number on the right, returning the remainder value if the two numbers cannot be divided exactly.
 - **Exponent** performs a exponentiation or 'to the power of' calculation, which raises the number on the left to the power of the number on the right. In our example, we raise 5 to the power of 2; 5 squared is 25.
 

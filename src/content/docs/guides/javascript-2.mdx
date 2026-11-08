@@ -24,14 +24,30 @@ We want our code to be able to respond to actions our users perform on the webpa
 To do that, we need Events.
 
 ### Creating an event
-To create an event, we're going to need an Event Handler, sometimes called an Event Listener. We use the addEventListener() method to create these.
+To create an event, we're going to need an Event Handler, sometimes called an Event Listener. We use the `addEventListener()` method to create these. Like HTML and CSS, JS does not care about indentation, but you should indent your code to make it readable. The `addEventListener()` method can be accessed either on the `document` (so any corresponding event on the page will be listened for), or on a specific element on the page (e.g a button or select). See below for how to target individual HTML elements.
 
-Our event listener requires two parameters inside its parentheses:
+Our event listener requires two parameters inside its parentheses: the event that is being listened for and a callback function with an `event` parameter, to do something when that event is fired (in this case, show an alert).
 
 ```js 
-addEventListener("keydown", (event) => {
+myElement.addEventListener("keydown", (event) => {
     alert(`you clicked "${event.key}".`)
 } )
+```
+
+## How do we interact with an HTML element?
+
+There are many ways to target an HTML element in JavaScript. You will see `document.getElementById()` used in many examples, but this only works with elements that have a unique `id` attribute. `document.querySelector()` targets elements in a similar way to CSS, so it is more flexible. In order to target multiple elements on the page (e.g. all the `li` elements in a `ul`), you need to use `document.querySelectorAll()`. You will then need some way of **looping** through the elements to access each one (loops are covered later).
+
+```js 
+const myUniqueElement = document.getElementById("uniqueId");
+
+// This targets any span that is next to another span 
+// in a ul element that is a direct child of the element with a 'hero' class!
+const myFancySelector = document.querySelector(".hero > ul span + span");
+
+// Get the HTML inside the h1 tag with a class of title.
+const myHeading = document.querySelector("h1");
+console.log(myText.innerHTML);
 ```
 
 ## Conditionals
