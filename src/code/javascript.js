@@ -100,7 +100,7 @@ const pizzaSelect = document.querySelector("select");
 let currentPizza;
 
 // Add a change event listener to the pizza select element.
-pizzaSelect.addEventListener("change", (e)=> {
+pizzaSelect.addEventListener("change", function(e){
     currentPizza = e.target.value;
     pizzaName.innerHTML = currentPizza;
     console.log(\`changed to \${currentPizza}\`);
@@ -158,7 +158,7 @@ let currentWeather;
 let wind;
 
 // Add a change event listener to the weather select element.
-button.addEventListener("click", (e) => {
+button.addEventListener("click", function(e){
 
     const currentWeather =  document.querySelector("select").value;
     const windSpeed = Number(document.querySelector("input").value);
@@ -203,7 +203,7 @@ const dayMenu = document.querySelector("p");
 let currentDay;
 
 // Add a change event listener to the day select element.
-daySelect.addEventListener("change", (e)=> {
+daySelect.addEventListener("change", function(e){
 
   currentDay = e.target.value;
   dayHeading.innerHTML = document.querySelector(\`option[value="\${e.target.value}"]\`).innerHTML;
@@ -259,12 +259,12 @@ const dayMenu = document.querySelector("p");
 let currentDay;
 
 // Add a change event listener to the day select element.
-daySelect.addEventListener("change", (e)=> {
+daySelect.addEventListener("change", function(e){
 
   currentDay = e.target.value;
   dayHeading.innerHTML = document.querySelector(\`option[value="\${currentDay}"]\`).innerHTML;
   dayMenu.innerHTML = document.querySelector(\`option[value="\${currentDay}"]\`).getAttribute("data-menu");
-  console.log(\`changed to \${currentDay}\`);
+  console.log(\`Changed to \${currentDay}\`);
 
 })
 `}
@@ -315,8 +315,10 @@ const moodEmojis = document.querySelectorAll("div span");
 const moodSelect = document.querySelector("input");
 
 // Function can pass in the number from the range slider
-const updateEmojis = (number) => {
-    moodEmojis.forEach((emoji) => emoji.style.display = 'none');
+const updateEmojis = function(number){
+    moodEmojis.forEach(function(emoji){
+      emoji.style.display = 'none';
+    });
     document.querySelector(\`div > span:nth-of-type(\${number})\`).style.display = 'block';
 }
 
@@ -324,7 +326,7 @@ const updateEmojis = (number) => {
 updateEmojis(2)
 
 // When the range slider changes, call the update function and pass in the new number
-moodSelect.addEventListener("change", (e)=> {
+moodSelect.addEventListener("change", function(e){
     updateEmojis(e.target.value)
 })
 `}

@@ -20,23 +20,24 @@ from "~/code/javascript.js"
 
 
 ## What is an event?
-We want our code to be able to respond to actions our users perform on the webpage – for example, clicking a button, or inputting some information.
-To do that, we need Events.
+We want our code to be able to respond to actions our users perform on the webpage; for example, clicking a button, or inputting some information.
+
+To do that, we need **events**.
 
 ### Creating an event
-To create an event, we're going to need an Event Handler, sometimes called an Event Listener. We use the `addEventListener()` method to create these. Like HTML and CSS, JS does not care about indentation, but you should indent your code to make it readable. The `addEventListener()` method can be accessed either on the `document` (so any corresponding event on the page will be listened for), or on a specific element on the page (e.g a button or select). See below for how to target individual HTML elements.
+To create an event, we're going to need an Event Handler, sometimes called an Event Listener. We use the `addEventListener()` method to create these. Like HTML and CSS, JS does not care about indentation, but you should indent your code to make it readable. The `addEventListener()` method can be accessed either on the `document` (so any corresponding event on the page will be listened for), or on a specific element on the page (e.g a button or text input). See below for how to target individual HTML elements.
 
-Our event listener requires two parameters inside its parentheses: the event that is being listened for and a callback function with an `event` parameter, to do something when that event is fired (in this case, show an alert).
+Our event listener requires two parameters inside its parentheses: the event that is being listened for and a callback function with an `event` parameter, to **do something** when that event is fired (in this case, show an alert if a key is pressed).
 
 ```js 
-myElement.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", function(event){
     alert(`you clicked "${event.key}".`)
-} )
+})
 ```
 
 ## How do we interact with an HTML element?
 
-There are many ways to target an HTML element in JavaScript. You will see `document.getElementById()` used in many examples, but this only works with elements that have a unique `id` attribute. `document.querySelector()` targets elements in a similar way to CSS, so it is more flexible. In order to target multiple elements on the page (e.g. all the `li` elements in a `ul`), you need to use `document.querySelectorAll()`. You will then need some way of **looping** through the elements to access each one (loops are covered later).
+There are many ways to target an HTML element in JavaScript. You will see `document.getElementById()` used in many examples, but this only works with elements that have been given a unique `id` attribute. `document.querySelector()` targets elements in a similar way to CSS, so it is more flexible. In order to target multiple elements on the page (e.g. all the `li` elements in a `ul`), you need to use `document.querySelectorAll()`. You will then need some way of **looping** through the elements to access each one (loops are covered later).
 
 ```js 
 const myUniqueElement = document.getElementById("uniqueId");
@@ -63,7 +64,7 @@ console.log(myText.innerHTML);
 
 - As we just discussed, sometimes we want to make decisions in our code based on a condition.
 - If... else statements look to see if an expression you specify returns as true. If it does, it executes one block of code; if not, it executes a different block.
-- We can also nest if...else statements if we wish to create several layers of choice - kind of like a dialogue tree in a video game.
+- We can also nest if... else statements if we wish to create several layers of choice - kind of like a dialogue tree in a video game.
 
 ### else... if
 
@@ -151,9 +152,10 @@ const iAmTired = function() {
 iAmTired();
 ```
 
-- So far we've seen a few examples of JavaScript's inbuilt **methods** - sets of instructions that perform specific tasks for us.
-- What's important to note is that methods are associated with an Object - you can't have the console.log() method without the 'console' object, for example.
-- If we want to create a set of instructions we can re-use, without having to connect them to a specific object, we need a Function.
+- So far we've seen a few examples of JavaScript's inbuilt **methods**; sets of instructions that perform specific tasks for us.
+- JavaScript consists of built-in objects which have various properties and methods. With `console.log()`, the `.log()` method is part of the `console` object.
+- We can create our own objects and 'object specifications' know as classes, but this is more advanced.
+- If we want to create a set of instructions we can re-use, without having to connect them to a specific object, we need a **function**.
 
 ## Defining a function
 
