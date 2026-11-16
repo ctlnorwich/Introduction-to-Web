@@ -18,28 +18,32 @@ from "~/code/javascript.js"
 <script src={prism}></script>
 <script src={sandbox} type="module"></script>
 
-
 ## What is an event?
 We want our code to be able to respond to actions our users perform on the webpage; for example, clicking a button, or inputting some information.
 
-To do that, we need **events**.
+To do that, we need to listen for **events**.
 
-### Creating an event
-To create an event, we're going to need an Event Handler, sometimes called an Event Listener. We use the `addEventListener()` method to create these. Like HTML and CSS, JS does not care about indentation, but you should indent your code to make it readable. The `addEventListener()` method can be accessed either on the `document` (so any corresponding event on the page will be listened for), or on a specific element on the page (e.g a button or text input). See below for how to target individual HTML elements.
+### Listening for an event
+To listen for an event, we use the `addEventListener()`. This method can be accessed either on the `document` (so any corresponding event on the page will be listened for), or on a specific element on the page (e.g a button or text input). See below for how to target individual HTML elements.
 
 Our event listener requires two parameters inside its parentheses: the event that is being listened for and a callback function with an `event` parameter, to **do something** when that event is fired (in this case, show an alert if a key is pressed).
 
 ```js 
 document.addEventListener("keydown", function(event){
-    alert(`you clicked "${event.key}".`)
+    alert(`you clicked "${event.key}".`);
 })
 ```
 
-## How do we interact with an HTML element?
+:::note[A Note About Indentation]
+Like HTML and CSS, JS does not care about indentation, but you should indent your code to make it readable. JavaScript does care about line breaks IF you don't add semicolons at the end of your instructions, since line breaks function as the end of the instruction instead.
+:::
 
-There are many ways to target an HTML element in JavaScript. You will see `document.getElementById()` used in many examples, but this only works with elements that have been given a unique `id` attribute. `document.querySelector()` targets elements in a similar way to CSS, so it is more flexible. In order to target multiple elements on the page (e.g. all the `li` elements in a `ul`), you need to use `document.querySelectorAll()`. You will then need some way of **looping** through the elements to access each one (loops are covered later).
+## How do we interact with HTML elements?
 
-```js 
+There are many ways to target an HTML element in JavaScript. You will see `document.getElementById()` used in many examples, but this only works with elements that have a unique `id` attribute. `document.querySelector()` targets elements in a similar way to CSS, so it is more flexible. In order to target multiple elements on the page (e.g. all the `li` elements in a `ul`), you need to use `document.querySelectorAll()`. This will return what is known as a `NodeList`. You will then need some way of **looping** through this list of elements to access each one (loops are covered later).
+
+```js
+// e.g. <h1 id="uniqueId">I'm Unique!</h1>
 const myUniqueElement = document.getElementById("uniqueId");
 
 // This targets any span that is next to another span 
@@ -53,6 +57,8 @@ console.log(myText.innerHTML);
 
 ## Conditionals
 
+Conditionals allow us to run code only in certain cases. Code will run or be ignored depending on whether an expression is true or false.
+
 ### if... else statements
 
 <div class="not-content">
@@ -62,9 +68,8 @@ console.log(myText.innerHTML);
   </code-sandbox>
 </div>
 
-- As we just discussed, sometimes we want to make decisions in our code based on a condition.
 - If... else statements look to see if an expression you specify returns as true. If it does, it executes one block of code; if not, it executes a different block.
-- We can also nest if... else statements if we wish to create several layers of choice - kind of like a dialogue tree in a video game.
+- We can also nest if... else statements if we wish to create several layers of choice - a bit like a dialogue tree in a video game.
 
 ### else... if
 
@@ -75,12 +80,11 @@ console.log(myText.innerHTML);
   </code-sandbox>
 </div>
 
-- If... else statements on their own give us only two options to choose from. But what if we need more?
-- We can use else if to add additional conditions into our If...else statement.
-- Since JavaScript runs from top to bottom, order is important - else if sits after the if action but before the else keyword.
+- `if... else` statements on their own give us only two options to choose from. What if we need more?
+- We can use `else... if` to add additional conditions into our `if... else` statement.
+- Since JavaScript runs from top to bottom, **order is important**
 - We can add as many else if conditions into our statement as we like.
-- Once the computer finds one of the statements true, it will not check any of the ones following it.
-
+- Once the computer finds one of the statements true, it will excute whatever code is nested in that statement and ignore anything following it.
 
 ### Logical operators: AND, OR, NOT
 
@@ -92,9 +96,9 @@ console.log(myText.innerHTML);
 </div>
 
 - Logical operators allow us to create more complex logic by testing more than one condition at a time.
-- The AND operator (&&) chains multiple conditions together. All the conditions must be true for the whole expression to return as true.
-- The OR operator (||) also chains together conditions, but only one of the conditions needs to be true for the whole expression to be true.
-- Finally, the NOT operator (!) negates all the conditions. The expression will only return as true if none of the individual conditions are true.
+- The AND operator (`&&`) chains multiple conditions together. All the conditions must be true for the whole expression to return as true.
+- The OR operator (`||`) also chains together conditions, but only one of the conditions needs to be true for the whole expression to be true.
+- Finally, the NOT operator (`!`) negates all the conditions. The expression will only return as true if none of the individual conditions are true.
 
 ## Ternary operators
 
@@ -103,7 +107,7 @@ let ticketsAvailable = true;
 ticketsAvailable ? console.log("Tickets Available!") : console.log("Sold Out!");
 ```
 
-- There's one last operator to introduce: the Ternary Operator.
+- There's one last operator to introduce: the **Ternary Operator**.
 - This operator allows us to test a condition, returning one of two expressions based on whether our condition is true or false.
 - It's a useful tool for simple conditional tests, as it takes up a lot less code than a full if/else statement.
 
@@ -111,12 +115,12 @@ ticketsAvailable ? console.log("Tickets Available!") : console.log("Sold Out!");
 
 <div class="not-content">
   <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxSwitch.html}</textarea>
+		<textarea for="html" open>{sandboxSwitch.html}</textarea>
     <textarea for="js" open>{sandboxSwitch.js}</textarea>
   </code-sandbox>
 </div>
 
-- If...else statements are brilliant for a lot of purposes, but the syntax can be a bit bulky when you have a large number of options for a pretty simple condition.
+- `if...else` statements are brilliant for a lot of purposes, but the syntax can be a bit bulky when you have a large number of options for a simple condition.
 - That's where **switch statements** can help us out. Switch statements can take a single expression and compare it against multiple options until it finds one to match, executing the associated code.
 - The break keyword is used to ensure that the switch statement stops looking for matching conditions once it finds one.
 - The default option is used if none of the other cases match the expression.
@@ -129,7 +133,7 @@ ticketsAvailable ? console.log("Tickets Available!") : console.log("Sold Out!");
 
 <div class="not-content">
   <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxAttributes.html}</textarea>
+		<textarea for="html" open>{sandboxAttributes.html}</textarea>
     <textarea for="js" open>{sandboxAttributes.js}</textarea>
   </code-sandbox>
 </div>
@@ -140,15 +144,16 @@ ticketsAvailable ? console.log("Tickets Available!") : console.log("Sold Out!");
 // Define a string variable
 let str = "It's too early for teaching";
 
-// Use methods to affect that string object
+// Use methods to modify the string (these methods are part of JavaScript's string object)
 let str1 = str.toLowerCase(); 
 let str2 = str.toUpperCase();
 
-/* Defining our function using an expression statement, creating a const variable */
+// Define a new function using an expression statement, creating a const variable
 const iAmTired = function() {
  console.log("It's too early for teaching!");
 }
-// Calling the function
+
+// Call the function
 iAmTired();
 ```
 
@@ -193,15 +198,23 @@ Add JS so that the range slider determines which emoji is visible.
 
 <div class="not-content">
    <code-sandbox hidden console="open">
-		<textarea for="html">{sandboxEmoji.html}</textarea>
+		<textarea for="html" open>{sandboxEmoji.html}</textarea>
     <textarea for="js" open>{sandboxEmoji.js}</textarea>
   </code-sandbox>
 </div>
 
 <div class="not-content">
-  <code-sandbox collapse hidden>
-  	<div for="intro"><summary>Solution...</summary></div>
-		<textarea for="html">{sandboxEmoji.html}</textarea>
+  <code-sandbox collapse hidden console="open">
+  	<div for="intro"><summary>Solution 1...</summary></div>
+		<textarea for="html" open>{sandboxEmoji.html}</textarea>
     <textarea for="js" open>{sandboxEmoji.jsSolution}</textarea>
+  </code-sandbox>
+</div>
+
+<div class="not-content">
+  <code-sandbox collapse hidden console="open">
+  	<div for="intro"><summary>Solution 2...</summary></div>
+		<textarea for="html" open>{sandboxEmoji.html}</textarea>
+    <textarea for="js" open>{sandboxEmoji.jsSolution2}</textarea>
   </code-sandbox>
 </div>

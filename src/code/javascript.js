@@ -293,40 +293,87 @@ const answerE = quickMathsE(5, 8);
 
 export const sandboxEmoji = {
   html: `
-<input type=range name="mood" min="1" max="4" value="2"></input>
+<label>
+How do you rate this content?<br>
+<input id="slider" type=range name="mood" min="1" max="4" value="2"></input>
+</label>
 
-<p>how do you rate this content?</p>
+<!-- The emoji spans have been given ids and data attributes. You can choose to use either of these to help you select elements or just ignore them! -->
 <div style="font-size: 3rem; margin-top: 0;">
-  <span>🙁</span>
-  <span>😐</span>
-  <span>🙂</span>
-  <span>😀</span>
+  <span id="emoji-1" data-emoji="1">🙁</span>
+  <span id="emoji-2" data-emoji="2">😐</span>
+  <span id="emoji-3" data-emoji="3">🙂</span>
+  <span id="emoji-4" data-emoji="4">😀</span>
 </h1>
 `,
   js: `
 // Emoji Challenge
 
-// Here's a hint about changing styles:
+// Here's a hint about changing styles (you can delete these when you start writing your code):
 document.querySelector("span:nth-of-type(2)").style.border = "solid red 2px";
+document.getElementById("emoji-3").style.border = "solid blue 2px";
+document.querySelector("span[data-emoji='4']").style.border = "solid green 2px";
 `,
-  jsSolution: `
-    // Example using span:nth-of-type() to find the active emoji
-const moodEmojis = document.querySelectorAll("div span");
-const moodSelect = document.querySelector("input");
+jsSolution: `
+// This example uses getElementById to get the individual emoji spans.
+const moodSlider = document.getElementById("slider");
+const moodEmoji1 = document.getElementById("emoji-1");
+const moodEmoji2 = document.getElementById("emoji-2");
+const moodEmoji3 = document.getElementById("emoji-3");
+const moodEmoji4 = document.getElementById("emoji-4");
+
+const updateEmojis = function(number){
+
+		moodEmoji1.style.display = 'none';
+		moodEmoji2.style.display = 'none';
+  	moodEmoji3.style.display = 'none';
+  	moodEmoji4.style.display = 'none';
+	  
+    switch(number) {
+  		case "1":
+		 	moodEmoji1.style.display = 'block'
+			break;
+
+			case "2":
+		 	moodEmoji2.style.display = 'block'
+			break;
+
+			case "3":
+		 	moodEmoji3.style.display = 'block'
+			break;
+
+			case "4":
+		 	moodEmoji4.style.display = 'block'
+			break;
+
+			default:
+			moodEmoji2.style.display = 'block'
+ 	}
+}
+
+// Call function with default
+updateEmojis()
+
+moodSlider.addEventListener("change", function(e){
+ 	updateEmojis(e.target.value)
+})`,
+jsSolution2: `
+// This example uses querySelectorAll and the span[data-emoji] attribute to find the emojis. We use a for... of loop to update al the emojis at once.
+const moodEmojis = document.querySelectorAll("span[data-emoji]");
+const moodSlider = document.querySelector("input");
 
 // Function can pass in the number from the range slider
 const updateEmojis = function(number){
-    moodEmojis.forEach(function(emoji){
+    for(const emoji of moodEmojis){
       emoji.style.display = 'none';
-    });
-    document.querySelector(\`div > span:nth-of-type(\${number})\`).style.display = 'block';
+    };
+    document.querySelector(\`span[data-emoji="\${number}"]\`).style.display = 'block';
 }
 
 // Default to emoji 2
 updateEmojis(2)
 
 // When the range slider changes, call the update function and pass in the new number
-moodSelect.addEventListener("change", function(e){
+moodSlider.addEventListener("change", function(e){
     updateEmojis(e.target.value)
-})
-`}
+})`}
