@@ -31,7 +31,7 @@ dairyProductsB[1] = "Custard";
 // console.log(dairyProducts);
 /* returns ["Milk", "Custard", "Cheese", "Ice Cream", "Yoghurt", "Butter", "Chocolate"] */
 
-/* Access Mulitdimensional */
+/* Access Multidimensional */
 const dairyProductsC = ["Milk", "Cream", ["Cheese", "Ice Cream", "Yoghurt", "Butter", "Chocolate"]];
 // console.log(dairyProductsC[2][1]);
 /* returns "Ice Cream" */

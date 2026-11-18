@@ -136,7 +136,7 @@ export const sandboxOperators = {
 </p>
 
 <p> 
-  label>
+  <label>
   Wind speed (mph)
   <input type="number" name="wind" min="5" max="100" value="10" step="5" />
   </label>
@@ -149,7 +149,6 @@ export const sandboxOperators = {
 `,
   js: `
 // Initialise const variables with html elements.
-const weatherType = document.querySelector("h1");
 const weatherAdvice = document.querySelector("p.advice");
 const button = document.querySelector("button");
 
@@ -160,7 +159,7 @@ let wind;
 // Add a change event listener to the weather select element.
 button.addEventListener("click", function(e){
 
-    const currentWeather =  document.querySelector("select").value;
+    const currentWeather = document.querySelector("select").value;
     const windSpeed = Number(document.querySelector("input").value);
 
     if (currentWeather === "raining" || currentWeather === "snowing") {
@@ -173,7 +172,7 @@ button.addEventListener("click", function(e){
         weatherAdvice.innerHTML = "<strong>Sun and a breeze</strong>! Perfect day for drying washing.";
     } 
     else {
-        weatherAdvice.innerHTML = "It's <strong>dry</strong> outside! Time to put outthe washing.";
+        weatherAdvice.innerHTML = "It's <strong>dry</strong> outside! Time to put out the washing.";
     };
 })
 `}
@@ -187,7 +186,7 @@ export const sandboxSwitch = {
   <option value="wed">Wednesday</option>
   <option value="thu">Thursday</option>
   <option value="fri">Friday</option>
-  <opion value="sat">Saturday</option> 
+  <option value="sat">Saturday</option> 
   <option value="sun">Sunday</option> 
 </select>
 <h1> <span style="font-size: 3rem;">🗓️</span> <span class="day">Please select a day</span></h1>
@@ -218,7 +217,7 @@ daySelect.addEventListener("change", function(e){
 
     case "tue":
       dayMenu.innerHTML = "Halloumi";
-    break
+    break;
 
     case "wed":
       dayMenu.innerHTML = "Lasagne";
@@ -304,7 +303,7 @@ How do you rate this content?<br>
   <span id="emoji-2" data-emoji="2">😐</span>
   <span id="emoji-3" data-emoji="3">🙂</span>
   <span id="emoji-4" data-emoji="4">😀</span>
-</h1>
+</div>
 `,
   js: `
 // Emoji Challenge
@@ -314,7 +313,7 @@ document.querySelector("span:nth-of-type(2)").style.border = "solid red 2px";
 document.getElementById("emoji-3").style.border = "solid blue 2px";
 document.querySelector("span[data-emoji='4']").style.border = "solid green 2px";
 `,
-jsSolution: `
+  jsSolution: `
 // This example uses getElementById to get the individual emoji spans.
 const moodSlider = document.getElementById("slider");
 const moodEmoji1 = document.getElementById("emoji-1");
@@ -351,13 +350,13 @@ const updateEmojis = function(number){
  	}
 }
 
-// Call function with default
+// Call function with no paramenter so the switch statement will use the default
 updateEmojis()
 
 moodSlider.addEventListener("change", function(e){
  	updateEmojis(e.target.value)
 })`,
-jsSolution2: `
+  jsSolution2: `
 // This example uses querySelectorAll and the span[data-emoji] attribute to find the emojis. We use a for... of loop to update al the emojis at once.
 const moodEmojis = document.querySelectorAll("span[data-emoji]");
 const moodSlider = document.querySelector("input");

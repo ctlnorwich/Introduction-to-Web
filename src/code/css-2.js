@@ -397,7 +397,7 @@ export const addingGrid = {
         <div>Six</div>
         <div>Seven</div>
 
-    </div>
+    </section>
 
   </body>
 
@@ -688,7 +688,7 @@ export const gridTemplateAreas = {
 </html>`,
   css: `
 html {
-  font-size: 12px
+  font-size: 12px;
 } 
 body {
     width: 90%;

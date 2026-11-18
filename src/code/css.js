@@ -137,7 +137,7 @@ export const marginCollapse = {
       <section>
           margin: -10px 0 10px;
       </section>    
-    </main
+    </main>
   </body>
 
 </html>
@@ -213,7 +213,7 @@ export const objectFit = {
         <img class="fixed fill" src="https://picsum.photos/id/237/300/200">
         <figcaption>Fill</figcaption>
       </figure>
-    </main
+    </main>
   </body>
 
 </html>
